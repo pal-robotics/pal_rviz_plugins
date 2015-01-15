@@ -47,9 +47,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="groupCombo">
          <property name="editable">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="insertPolicy">
           <enum>QComboBox::InsertAlphabetically</enum>
@@ -63,6 +63,9 @@
      </item>
      <item>
       <widget class="pal::WaypointGroupList" name="groupList">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="dragDropMode">
         <enum>QAbstractItemView::DragDrop</enum>
        </property>
@@ -74,14 +77,14 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="newGroupBut">
          <property name="text">
           <string>New Group</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="delGroupBut">
          <property name="text">
           <string>Delete Group</string>
          </property>

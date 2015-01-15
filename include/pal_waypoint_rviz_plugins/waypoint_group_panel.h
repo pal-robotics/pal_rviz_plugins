@@ -56,10 +56,12 @@ class WaypointGroupPanel;
 
 class WaypointGroupList : public QListWidget
 {
+    Q_OBJECT
 public:
 WaypointGroupList(QWidget *parent);
 
-
+Q_SIGNALS:
+void groupPoisChanged();
 
 // QWidget interface
 protected:
@@ -96,12 +98,19 @@ public:
 
 public Q_SLOTS:
   void updatePoiList();
+  void groupChanged(const QString &group);
+  void newGroup();
+  void delGroup();
+  void saveActiveGroup();
 
 protected:
   ros::NodeHandle _nh;
 
   Ui::WaypointGroupPanel *ui;
   std::string _poiParam;
+  std::string _groupParam;
+  QString _activeGroup;
+
 };
 
 } // pal
