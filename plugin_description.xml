@@ -1,0 +1,9 @@
+<library path="lib/libwaypoint_group_panel">
+  <class name="pal-waypoint_rviz_plugins/WaypointGroup"
+         type="pal::WaypointGroupPanel"
+         base_class_type="rviz::Panel">
+    <description>
+        A panel allowing to group various points of interest into a waypoint group
+    </description>
+  </class>
+</library>
