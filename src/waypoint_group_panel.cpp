@@ -61,7 +61,6 @@ void WaypointGroupList::dropEvent(QDropEvent *ev)
 }
 
 
-
 WaypointGroupPanel::WaypointGroupPanel( QWidget* parent )
     : rviz::Panel( parent ),
       ui(new Ui::WaypointGroupPanel),
