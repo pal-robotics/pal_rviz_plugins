@@ -1,3 +1,10 @@
+/*
+ *  pal_joystick.h
+ *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
+ *  Created on: 2015
+ *      Author:  victor
+ */
+
 #ifndef PALJOYSTICK_H
 #define PALJOYSTICK_H
 
