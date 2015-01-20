@@ -1,0 +1,9 @@
+<library path="lib/libpal_teleop_panel">
+  <class name="pal-teleop_rviz_plugins/PalTeleop"
+         type="pal::PalTeleopPanel"
+         base_class_type="rviz::Panel">
+    <description>
+        A panel allowing to group various points of interest into a teleop group
+    </description>
+  </class>
+</library>

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/joy">
+        <file alias="joyBG">JoystickBackground.png</file>
+        <file alias="joyCenter">JoystickCenter.png</file>
+    </qresource>
+</RCC>
