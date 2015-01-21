@@ -7,8 +7,11 @@
 
 #include <pal_waypoint_rviz_plugins/waypoint_group_panel.h>
 #include <qapplication.h>
+#include <qtimer.h>
+#include "qros_spinner.h"
 // Include header files for application components.
 // ...
+
 
 int main(int argc, char *argv[])
 {
@@ -21,5 +24,7 @@ int main(int argc, char *argv[])
 
     pal::WaypointGroupPanel panel;
     panel.show();
+    QRosSpinner spinner;
+
     return app.exec();
 }

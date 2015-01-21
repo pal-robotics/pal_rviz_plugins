@@ -5,6 +5,7 @@ project(pal_waypoint_rviz_plugins)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  pal_waypoint
   roscpp
   rviz
 )
@@ -103,7 +104,7 @@ include(${QT_USE_FILE})
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
 
-QT4_WRAP_CPP(WAYPOINT_GROUP_PANEL_MOC_FILES include/pal_waypoint_rviz_plugins/waypoint_group_panel.h)
+QT4_WRAP_CPP(WAYPOINT_GROUP_PANEL_MOC_FILES src/qros_spinner.h include/pal_waypoint_rviz_plugins/waypoint_group_panel.h)
 QT4_WRAP_UI(WAYPOINT_GROUP_PANEL_UIS_H src/waypoint_group_panel.ui)
 ## Declare a cpp library
  add_library(waypoint_group_panel src/waypoint_group_panel.cpp

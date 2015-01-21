@@ -14,7 +14,8 @@
 # include <rviz/panel.h>
 #endif
 #include <qlistwidget.h>
-
+#include <actionlib/client/simple_action_client.h>
+#include <pal_waypoint/DoWaypointNavigationAction.h>
 class QLineEdit;
 
 namespace pal
@@ -80,15 +81,24 @@ public Q_SLOTS:
   void groupChanged(const QString &group);
   void newGroup();
   void delGroup();
+  void runGroup();
+  void stopGroup();
   void saveActiveGroup();
 
 protected:
+  void updateButtonStatus() const;
+  void goalActive();
+  void goalDone(const actionlib::SimpleClientGoalState& state,
+                const pal_waypoint::DoWaypointNavigationResultConstPtr& result);
   ros::NodeHandle _nh;
 
   Ui::WaypointGroupPanel *ui;
   std::string _poiParam;
   std::string _groupParam;
   QString _activeGroup;
+  actionlib::SimpleActionClient<pal_waypoint::DoWaypointNavigationAction> _actionClient;
+  bool _goalRunning;
+
 
 };
 

@@ -8,6 +8,7 @@
 #include <QDropEvent>
 #include <QTimer>
 #include <QMenu>
+#include <QMessageBox>
 #include <QInputDialog>
 
 #include <pal_waypoint_rviz_plugins/waypoint_group_panel.h>
@@ -73,13 +74,19 @@ WaypointGroupPanel::WaypointGroupPanel( QWidget* parent )
       ui(new Ui::WaypointGroupPanel),
       _poiParam("/mmap/poi/submap_0"),
       _groupParam("/mmap/poigroup/submap_0/"),
-      _activeGroup("")
+      _activeGroup(""),
+      _actionClient("/waypoint_navigation_server_node/navigate", false),
+      _goalRunning(false)
 {
     ui->setupUi(this);
     connect(ui->groupCombo, SIGNAL(currentIndexChanged(QString)),this, SLOT(groupChanged(QString)));
     connect(ui->newGroupBut, SIGNAL(clicked()),this, SLOT(newGroup()));
     connect(ui->delGroupBut, SIGNAL(clicked()),this, SLOT(delGroup()));
+    connect(ui->runGroupBut, SIGNAL(clicked()),this, SLOT(runGroup()));
+    connect(ui->stopGroupBut, SIGNAL(clicked()),this, SLOT(stopGroup()));
     connect(ui->groupList, SIGNAL(groupPoisChanged()),this, SLOT(saveActiveGroup()));
+
+    updateButtonStatus();
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updatePoiList()));
@@ -107,7 +114,6 @@ void WaypointGroupPanel::updatePoiList()
     if (!_nh.getParamCached(_poiParam, pois))
         return;
     ui->poiList->clear();
-
     for(XmlRpc::XmlRpcValue::iterator it = pois.begin(); it != pois.end(); ++it)
     {
         std::string id = it->first;
@@ -123,12 +129,12 @@ void WaypointGroupPanel::groupChanged(const QString &group)
     saveActiveGroup();
 
     _activeGroup = group;
-    ui->groupList->setEnabled(!group.isEmpty());
+    updateButtonStatus();
 
     XmlRpc::XmlRpcValue groupParam;
     ui->groupList->clear();
-    if (!_nh.getParamCached(_groupParam + "/" + group.toStdString(),
-                            groupParam))
+    if (!_nh.getParamCached(_groupParam + "/" + group.toStdString(), groupParam)
+            || groupParam.getType() != XmlRpc::XmlRpcValue::TypeArray)
         return;
 
     for(int i = 0; i < groupParam.size(); ++i)
@@ -149,10 +155,33 @@ void WaypointGroupPanel::newGroup()
 
 void WaypointGroupPanel::delGroup()
 {
-    std::string group = ui->groupCombo->currentText().toStdString();
+    std::string group = _activeGroup.toStdString();
     _nh.deleteParam(_groupParam + "/" + group);
     _activeGroup = ""; // So removeItem doesn't trigger groupChanged and saves the params
     ui->groupCombo->removeItem(ui->groupCombo->currentIndex());
+}
+
+void WaypointGroupPanel::runGroup()
+{
+    if (!_actionClient.waitForServer(ros::Duration(1)))
+    {
+        QMessageBox::warning(this, "Can't connect to server",
+                             "Errors connecting to waypoint group server.");
+        return;
+    }
+
+    pal_waypoint::DoWaypointNavigationGoal goal;
+    goal.group = _activeGroup.toStdString();
+    _actionClient.sendGoal(goal,
+                           boost::bind(&WaypointGroupPanel::goalDone, this, _1, _2),
+                           boost::bind(&WaypointGroupPanel::goalActive, this));
+
+
+}
+
+void WaypointGroupPanel::stopGroup()
+{
+    _actionClient.cancelGoal();
 }
 
 void WaypointGroupPanel::saveActiveGroup()
@@ -170,6 +199,29 @@ void WaypointGroupPanel::saveActiveGroup()
     _nh.setParam(_groupParam + "/" + _activeGroup.toStdString(),
                  pois);
 
+}
+
+void WaypointGroupPanel::updateButtonStatus() const
+{
+    bool hasGroup = !_activeGroup.isEmpty();
+    ui->groupList->setEnabled(hasGroup);
+    ui->delGroupBut->setEnabled(hasGroup);
+
+    ui->runGroupBut->setEnabled(hasGroup && !_goalRunning);
+    ui->stopGroupBut->setEnabled(hasGroup && _goalRunning);
+}
+
+void WaypointGroupPanel::goalActive()
+{
+    _goalRunning = true;
+    updateButtonStatus();
+}
+
+void WaypointGroupPanel::goalDone(const actionlib::SimpleClientGoalState& state,
+                                  const pal_waypoint::DoWaypointNavigationResultConstPtr& result)
+{
+    _goalRunning = false;
+    updateButtonStatus();
 }
 } // end namespace pal
 
