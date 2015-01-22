@@ -12,6 +12,8 @@
 #include <QInputDialog>
 
 #include <pal_waypoint_rviz_plugins/waypoint_group_panel.h>
+#include <pal_waypoint/DoWaypointNavigationAction.h>
+
 #include "ui_waypoint_group_panel.h"
 
 #include <ros/console.h>

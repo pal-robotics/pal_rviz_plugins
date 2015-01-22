@@ -16,6 +16,7 @@
 #include <qlistwidget.h>
 #include <actionlib/client/simple_action_client.h>
 #include <pal_waypoint/DoWaypointNavigationAction.h>
+
 class QLineEdit;
 
 namespace pal

@@ -148,10 +148,10 @@ target_link_libraries(pal_teleop_panel_test pal_teleop_panel)
 # )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS pal_teleop_panel  pal_teleop_panel_test
+install(TARGETS pal_teleop_panel
   #ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  #RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 install(DIRECTORY resources
