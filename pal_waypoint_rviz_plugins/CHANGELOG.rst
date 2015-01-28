@@ -2,6 +2,13 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Improve UI layouts for waypoint_group_panel
+* Fix waypoint_group_panel topic name
+* Remove unnecessary install rules
+* Contributors: Víctor López
+
 0.0.1 (2015-01-21)
 ------------------
 * First version of waypoint group panel plugin
