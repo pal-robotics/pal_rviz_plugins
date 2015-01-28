@@ -2,8 +2,8 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2015-01-28)
+------------------
 * Fix size of joystick, to avoid resizing issues
 * Fix joystick continuously publishing 0 when unused
 * Remove unnecessary install rules
