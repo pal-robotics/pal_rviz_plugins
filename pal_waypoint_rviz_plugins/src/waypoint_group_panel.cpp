@@ -77,7 +77,7 @@ WaypointGroupPanel::WaypointGroupPanel( QWidget* parent )
       _poiParam("/mmap/poi/submap_0"),
       _groupParam("/mmap/poigroup/submap_0/"),
       _activeGroup(""),
-      _actionClient("/waypoint_navigation_server_node/navigate", false),
+      _actionClient("/pal_waypoint/navigate", false),
       _goalRunning(false)
 {
     ui->setupUi(this);
