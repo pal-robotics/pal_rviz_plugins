@@ -54,6 +54,8 @@ protected:
   Ui::PalTeleopPanel *ui;
   ros::Publisher _pub;
   PalJoystick *_joy;
+  qreal _lastX;
+  qreal _lastZ;
 };
 } // pal
 

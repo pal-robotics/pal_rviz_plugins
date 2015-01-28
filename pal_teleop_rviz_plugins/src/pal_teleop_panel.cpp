@@ -41,21 +41,23 @@ public:
 
 PalTeleopPanel::PalTeleopPanel(QWidget *parent)
     : rviz::Panel(parent),
-    ui(new Ui::PalTeleopPanel)
+      ui(new Ui::PalTeleopPanel),
+      _lastX(0.0),
+      _lastZ(0.0)
 {
     ui->setupUi(this);
 
-//    SquareLayout *layout = new SquareLayout(this);
-//    setLayout(layout);
-//    PalJoystick *joy = new PalJoystick;
-//    layout->addWidget(joy);
-//    joy->setSizePolicy(QSizePolicy::MinimumExpanding,
-//                       QSizePolicy::MinimumExpanding);
-//    QSizePolicy p(sizePolicy());
-//    p.setHeightForWidth(true);
-//    setSizePolicy(p);
+    //    SquareLayout *layout = new SquareLayout(this);
+    //    setLayout(layout);
+    //    PalJoystick *joy = new PalJoystick;
+    //    layout->addWidget(joy);
+    //    joy->setSizePolicy(QSizePolicy::MinimumExpanding,
+    //                       QSizePolicy::MinimumExpanding);
+    //    QSizePolicy p(sizePolicy());
+    //    p.setHeightForWidth(true);
+    //    setSizePolicy(p);
     connect(ui->joystick, SIGNAL(posChanged(qreal,qreal)), this, SLOT(joystickPos(qreal,qreal)));
-    _pub = _nh.advertise<geometry_msgs::Twist>("/twist_mux/cmd_vel", 1);
+    _pub = _nh.advertise<geometry_msgs::Twist>("/rviz_joy_vel", 1);
 
 }
 
@@ -73,16 +75,16 @@ qreal calculateExponentialSpeed(qreal x)
 {
     //Old speed
     //See the plot of the speed here: http://www.wolframalpha.com/input/?i=e+^%28%28x^2%29*ln+2%29+-1%2C+from+x%3D-1+to+1
-  //qreal speed = pow(M_E,((pow(x,2)*(log(2))))) -1;
+    //qreal speed = pow(M_E,((pow(x,2)*(log(2))))) -1;
 
-  // Speed is x^2
-  qreal speed = pow(x, 2);
+    // Speed is x^2
+    qreal speed = pow(x, 2);
 
-  if (x >= 0)
-    return speed;
-  else
-    return -speed;
-  //e ^((x^2)*ln 2) -1
+    if (x >= 0)
+        return speed;
+    else
+        return -speed;
+    //e ^((x^2)*ln 2) -1
 
 }
 
@@ -99,9 +101,17 @@ void PalTeleopPanel::joystickPos(qreal x, qreal y)
     twist.linear.x = linearX;
     twist.angular.z = angularZ;
 
+    if (_lastX == linearX   &&
+        _lastZ == angularZ  &&
+        _lastX == 0.0       &&
+        _lastZ == 0.0)
+        return; /// Don't publish 0 speed more than once
     ui->angSpeed->setValue(angularZ);
     ui->linSpeed->setValue(linearX);
     _pub.publish(twist);
+    _lastX = linearX;
+    _lastZ = angularZ;
+
 
 }
 
