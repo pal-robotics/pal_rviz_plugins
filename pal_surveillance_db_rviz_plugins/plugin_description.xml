@@ -1,0 +1,9 @@
+<library path="lib/libsurveillance_db_panel">
+  <class name="pal-surveillance_db_rviz_plugins/SurveillanceDb"
+         type="pal::SurveillanceDbPanel"
+         base_class_type="rviz::Panel">
+    <description>
+        A panel allowing to display surveillance detections
+    </description>
+  </class>
+</library>
