@@ -2,6 +2,11 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Move test executables to test dir and build only if testing enabled
+* Contributors: Víctor López
+
 0.0.3 (2015-01-28)
 ------------------
 * Improve UI layouts for waypoint_group_panel

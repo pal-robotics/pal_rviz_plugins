@@ -2,6 +2,11 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Move test executables to test dir and build only if testing enabled
+* Contributors: Víctor López
+
 0.0.3 (2015-01-28)
 ------------------
 * Fix size of joystick, to avoid resizing issues

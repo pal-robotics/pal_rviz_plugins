@@ -4,6 +4,10 @@ Changelog for package pal_surveillance_db_rviz_plugins
 
 Forthcoming
 -----------
+* Update Changelog
+* Add pal_surveillance_db_rviz_plugin
+* Contributors: Víctor López
+
 * Add pal_surveillance_db_rviz_plugin
 * Contributors: Víctor López
 
