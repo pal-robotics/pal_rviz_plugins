@@ -2,8 +2,8 @@
 Changelog for package pal_surveillance_db_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.4 (2015-01-30)
+------------------
 * Update Changelog
 * Add pal_surveillance_db_rviz_plugin
 * Contributors: Víctor López
