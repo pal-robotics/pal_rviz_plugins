@@ -104,15 +104,13 @@ include(${QT_USE_FILE})
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
 
-QT4_WRAP_CPP(WAYPOINT_GROUP_PANEL_MOC_FILES src/qros_spinner.h include/pal_waypoint_rviz_plugins/waypoint_group_panel.h)
+QT4_WRAP_CPP(WAYPOINT_GROUP_PANEL_MOC_FILES test/qros_spinner.h include/pal_waypoint_rviz_plugins/waypoint_group_panel.h)
 QT4_WRAP_UI(WAYPOINT_GROUP_PANEL_UIS_H src/waypoint_group_panel.ui)
 ## Declare a cpp library
  add_library(waypoint_group_panel src/waypoint_group_panel.cpp
                                   ${WAYPOINT_GROUP_PANEL_MOC_FILES}
                                   ${WAYPOINT_GROUP_PANEL_UIS_H})
 
-## Declare a cpp executable
-add_executable(waypoint_group_panel_test src/waypoint_group_panel_test.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -123,7 +121,6 @@ target_link_libraries(waypoint_group_panel
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(waypoint_group_panel_test waypoint_group_panel)
 #############
 ## Install ##
 #############
@@ -163,6 +160,11 @@ install(TARGETS waypoint_group_panel
 ## Testing ##
 #############
 
+if(CATKIN_ENABLE_TESTING)
+    #This is not a unit test, just an executable to visualize the rviz panel
+    add_executable(waypoint_group_panel_test test/waypoint_group_panel_test.cpp)
+    target_link_libraries(waypoint_group_panel_test waypoint_group_panel)
+endif(CATKIN_ENABLE_TESTING)
 ## Add gtest based cpp test target and link libraries
 # catkin_add_gtest(${PROJECT_NAME}-test test/test_pal_waypoint_rviz_plugins.cpp)
 # if(TARGET ${PROJECT_NAME}-test)

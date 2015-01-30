@@ -119,8 +119,6 @@ add_library(pal_teleop_panel src/pal_teleop_panel.cpp
                                   ${PAL_TELEOP_PANEL_UIS_H}
                                   ${QT_RESOURCES_CPP})
 
-## Declare a cpp executable
-add_executable(pal_teleop_panel_test src/pal_teleop_panel_test.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -132,11 +130,15 @@ target_link_libraries(pal_teleop_panel
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(pal_teleop_panel_test pal_teleop_panel)
 #############
 ## Install ##
 #############
 
+if(CATKIN_ENABLE_TESTING)
+    # This is not an unit test, just an executable to visualize the rviz panel
+    add_executable(pal_teleop_panel_test test/pal_teleop_panel_test.cpp)
+    target_link_libraries(pal_teleop_panel_test pal_teleop_panel)
+endif(CATKIN_ENABLE_TESTING)
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
