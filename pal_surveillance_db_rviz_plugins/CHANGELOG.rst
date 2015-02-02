@@ -2,8 +2,8 @@
 Changelog for package pal_surveillance_db_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.5 (2015-02-02)
+------------------
 * Load entries from databse on startup
 * Contributors: Víctor López
 
