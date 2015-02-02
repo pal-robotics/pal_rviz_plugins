@@ -104,6 +104,7 @@ SurveillanceDbPanel::SurveillanceDbPanel( QWidget* parent )
     ui->setupUi(this);
     _sub = _nh.subscribe("/warehouse/surveillance_db/images/inserts", 1, &SurveillanceDbPanel::insertCb, this);
     connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(recordSelected(int)));
+    updateDetectionList();
 }
 
 SurveillanceDbPanel::~SurveillanceDbPanel()
@@ -111,8 +112,7 @@ SurveillanceDbPanel::~SurveillanceDbPanel()
     delete ui;
 }
 
-
-void SurveillanceDbPanel::insertCb(const std_msgs::StringConstPtr &s)
+void SurveillanceDbPanel::updateDetectionList()
 {
     std::map<std::string, ros::Time> records =_db.getRecords();
     ROS_INFO_STREAM("Got " << records.size() << " records");
@@ -124,14 +124,19 @@ void SurveillanceDbPanel::insertCb(const std_msgs::StringConstPtr &s)
     {
         ui->comboBox->insertItem(ui->comboBox->count(), QString::fromStdString(it->first));
     }
+}
 
+
+void SurveillanceDbPanel::insertCb(const std_msgs::StringConstPtr &s)
+{
+    updateDetectionList();
 }
 
 void SurveillanceDbPanel::recordSelected(int index)
 {
     QString tId = ui->comboBox->itemText(index);
 
-    ROS_INFO_STREAM("DIsplaying " << tId.toStdString());
+    ROS_INFO_STREAM("Displaying " << tId.toStdString());
     try
     {
         sensor_msgs::Image img = _db.getImgRecord(tId.toStdString());
