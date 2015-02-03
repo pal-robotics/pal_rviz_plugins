@@ -132,6 +132,9 @@ install(TARGETS surveillance_db_panel
   #RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+install(FILES plugin_description.xml
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
 #   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
