@@ -2,6 +2,11 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add install rule for plugin descriptions
+* Contributors: Víctor López
+
 0.0.5 (2015-02-02)
 ------------------
 
