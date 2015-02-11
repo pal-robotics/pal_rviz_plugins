@@ -43,7 +43,7 @@
   <customwidget>
    <class>pal::QRosImageLabel</class>
    <extends>QLabel</extends>
-   <header location="global">pal_surveillance_db_rviz_plugins/surveillance_db_panel.h</header>
+   <header location="global">pal_qt_widgets/qros_image_label.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

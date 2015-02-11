@@ -4,17 +4,12 @@
  *  Created on: 2015
  *      Author:  victor
  */
+#include <pal_surveillance_db_rviz_plugins/surveillance_db_panel.h>
 #include "ui_surveillance_db_panel.h"
 
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/image_encodings.h>
-
-#include <pal_qt_widgets/qros_image_label.h>
-#include <pal_surveillance_db_rviz_plugins/surveillance_db_panel.h>
 #include <image_transport/image_transport.h>
-
-
-#include <rqt_image_view/ratio_layouted_frame.h>
 #include <ros/console.h>
 
 
@@ -73,10 +68,7 @@ void SurveillanceDbPanel::recordSelected(int index)
     {
         ui->image_display->setPixmap(QPixmap());
     }
-
-
 }
-
 } // end namespace pal
 
 #include <pluginlib/class_list_macros.h>

@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
   rviz
   cv_bridge
   rqt_image_view
+  pal_qt_widgets
 )
 
 ################################################
