@@ -26,16 +26,6 @@ namespace Ui {
 class SurveillanceDbPanel;
 }
 
-class QRosImageLabel : public QLabel
-{
-public:
-    QRosImageLabel(QWidget* parent = 0);
-
-    virtual ~QRosImageLabel ();
-    void setImage(const sensor_msgs::Image::ConstPtr& msg);
-
-};
-
 class SurveillanceDbPanel: public rviz::Panel
 {
     // This class uses Qt slots and is a subclass of QObject, so it needs

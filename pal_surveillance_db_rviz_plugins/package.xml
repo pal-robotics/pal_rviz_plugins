@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package>
+<package format="2">
   <name>pal_surveillance_db_rviz_plugins</name>
   <version>0.0.6</version>
   <description>The pal_surveillance_db_rviz_plugins package</description>
@@ -40,14 +40,11 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>rviz</build_depend>
-  <build_depend>surveillance_db</build_depend>
-  <build_depend>rqt_image_view</build_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>rviz</run_depend>
-  <run_depend>surveillance_db</run_depend>
-  <run_depend>rqt_image_view</run_depend>
+  <depend>pal_qt_widgets</depend>
+  <depend>roscpp</depend>
+  <depend>rviz</depend>
+  <depend>surveillance_db</depend>
+  <depend>rqt_image_view</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
