@@ -1,3 +1,4 @@
+<class_libraries>
 <library path="lib/libwaypoint_group_panel">
   <class name="pal-waypoint_rviz_plugins/WaypointGroup"
          type="pal::WaypointGroupPanel"
@@ -7,3 +8,13 @@
     </description>
   </class>
 </library>
+<library path="lib/libadd_poi_tool">
+  <class name="pal-waypoint_rviz_plugins/AddPoi"
+         type="pal::AddPoiTool"
+         base_class_type="rviz::Tool">
+    <description>
+        A tool that enables the addition of a new point of interest.
+    </description>
+  </class>
+</library>
+</class_libraries>

@@ -106,14 +106,14 @@ add_definitions(-DQT_NO_KEYWORDS)
 
 QT4_WRAP_CPP(WAYPOINT_GROUP_PANEL_MOC_FILES test/qros_spinner.h include/pal_waypoint_rviz_plugins/waypoint_group_panel.h)
 QT4_WRAP_UI(WAYPOINT_GROUP_PANEL_UIS_H src/waypoint_group_panel.ui)
+
+
+QT4_WRAP_CPP(ADD_POI_TOOL_MOC_FILES include/pal_waypoint_rviz_plugins/add_poi_tool.h)
 ## Declare a cpp library
  add_library(waypoint_group_panel src/waypoint_group_panel.cpp
                                   ${WAYPOINT_GROUP_PANEL_MOC_FILES}
                                   ${WAYPOINT_GROUP_PANEL_UIS_H})
 
-
-## Add cmake target dependencies of the executable/library
-## as an example, message headers may need to be generated before nodes
 # add_dependencies(pal_waypoint_rviz_plugins_node pal_waypoint_rviz_plugins_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
@@ -121,6 +121,15 @@ target_link_libraries(waypoint_group_panel
   ${catkin_LIBRARIES}
 )
 
+ add_library(add_poi_tool         src/add_poi_tool.cpp
+                                  ${ADD_POI_TOOL_MOC_FILES})
+
+# add_dependencies(pal_waypoint_rviz_plugins_node pal_waypoint_rviz_plugins_generate_messages_cpp)
+
+## Specify libraries to link a library or executable target against
+target_link_libraries(add_poi_tool
+  ${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############
@@ -136,11 +145,17 @@ target_link_libraries(waypoint_group_panel
 # )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS waypoint_group_panel
+install(TARGETS waypoint_group_panel add_poi_tool
   #ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   #RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+
+
+install(DIRECTORY icons
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
 
 install(FILES plugin_description.xml
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
