@@ -4,6 +4,8 @@ Changelog for package pal_teleop_rviz_plugins
 
 Forthcoming
 -----------
+* Update changelog
+* Contributors: Víctor López
 
 0.0.6 (2015-02-03)
 ------------------

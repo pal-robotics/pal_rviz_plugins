@@ -4,6 +4,10 @@ Changelog for package pal_inventory_rviz_plugins
 
 Forthcoming
 -----------
+* Update changelog
+* Add pal_inventory_rviz_plugins
+* Contributors: Víctor López
+
 * Add pal_inventory_rviz_plugins
 * Contributors: Víctor López
 

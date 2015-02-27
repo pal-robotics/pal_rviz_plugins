@@ -2,6 +2,12 @@
 Changelog for package pal_surveillance_db_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix qros_image_label include
+* Move qros_image_label to pal_qt_widgets
+* Contributors: Víctor López
+
 0.0.6 (2015-02-03)
 ------------------
 * Add install rule for plugin descriptions
