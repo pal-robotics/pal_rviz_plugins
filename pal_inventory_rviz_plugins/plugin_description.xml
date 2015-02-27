@@ -1,0 +1,11 @@
+<class_libraries>
+<library path="lib/libinventory_zone_panel">
+  <class name="pal-inventory_rviz_plugins/inventoryZone"
+         type="pal::InventoryZonePanel"
+         base_class_type="rviz::Panel">
+    <description>
+        A panel allowing to control if all/none/or only the active inventory zois are displayed
+    </description>
+  </class>
+</library>
+</class_libraries>
