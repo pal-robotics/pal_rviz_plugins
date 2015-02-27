@@ -2,8 +2,8 @@
 Changelog for package pal_inventory_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.7 (2015-02-27)
+------------------
 * Update changelog
 * Add pal_inventory_rviz_plugins
 * Contributors: Víctor López
