@@ -2,6 +2,12 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add tf dependency, change to format 2 and CMakeLists cleanup
+* Add "Add POI Tool"
+* Contributors: Víctor López
+
 0.0.6 (2015-02-03)
 ------------------
 * Add install rule for plugin descriptions
