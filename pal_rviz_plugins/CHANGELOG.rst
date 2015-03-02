@@ -2,6 +2,9 @@
 Changelog for package pal_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.0.7 (2015-02-27)
 ------------------
 * Update changelog
