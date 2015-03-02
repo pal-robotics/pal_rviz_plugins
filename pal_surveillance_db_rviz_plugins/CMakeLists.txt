@@ -6,6 +6,7 @@ project(pal_surveillance_db_rviz_plugins)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   surveillance_db
+  pluginlib
   roscpp
   rviz
   cv_bridge

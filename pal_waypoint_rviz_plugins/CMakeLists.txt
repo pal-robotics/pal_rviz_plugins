@@ -6,6 +6,7 @@ project(pal_waypoint_rviz_plugins)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   pal_waypoint
+  pluginlib
   roscpp
   rviz
   tf

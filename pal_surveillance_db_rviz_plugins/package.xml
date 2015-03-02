@@ -43,6 +43,7 @@
   <depend>pal_qt_widgets</depend>
   <depend>roscpp</depend>
   <depend>rviz</depend>
+  <depend>pluginlib</depend>
   <depend>surveillance_db</depend>
   <depend>rqt_image_view</depend>
 

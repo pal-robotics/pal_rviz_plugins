@@ -5,6 +5,7 @@ project(pal_teleop_rviz_plugins)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  pluginlib
   roscpp
   rviz
 )

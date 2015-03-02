@@ -29,6 +29,7 @@
 
 
   <buildtool_depend>catkin</buildtool_depend>
+  <depend>pluginlib</depend>
   <depend>roscpp</depend>
   <depend>rviz</depend>
   <depend>pal_inventory_msgs</depend>

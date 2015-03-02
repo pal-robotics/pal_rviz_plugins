@@ -6,6 +6,7 @@ project(pal_inventory_rviz_plugins)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   pal_inventory_msgs
+  pluginlib
   roscpp
   rviz
   tf
