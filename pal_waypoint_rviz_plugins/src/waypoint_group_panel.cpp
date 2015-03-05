@@ -94,11 +94,12 @@ WaypointGroupPanel::WaypointGroupPanel( QWidget* parent )
     connect(timer, SIGNAL(timeout()), this, SLOT(updatePoiList()));
     timer->start(5000);
     updatePoiList();
-
-    XmlRpc::XmlRpcValue pois;
-    if (_nh.getParamCached(_groupParam, pois))
+    XmlRpc::XmlRpcValue wpGroups;
+    if (_nh.getParamCached(_groupParam, wpGroups)  &&
+        wpGroups.getType() == XmlRpc::XmlRpcValue::TypeStruct)
     {
-        for(XmlRpc::XmlRpcValue::iterator it = pois.begin(); it != pois.end(); ++it)
+        for(XmlRpc::XmlRpcValue::iterator it = wpGroups.begin();
+            it != wpGroups.end(); ++it)
         {
             ui->groupCombo->addItem(QString::fromStdString(it->first));
         }
@@ -113,8 +114,10 @@ WaypointGroupPanel::~WaypointGroupPanel()
 void WaypointGroupPanel::updatePoiList()
 {
     XmlRpc::XmlRpcValue pois;
-    if (!_nh.getParamCached(_poiParam, pois))
+    if (!_nh.getParamCached(_poiParam, pois) ||
+        pois.getType() != XmlRpc::XmlRpcValue::TypeStruct)
         return;
+
     ui->poiList->clear();
     for(XmlRpc::XmlRpcValue::iterator it = pois.begin(); it != pois.end(); ++it)
     {
@@ -124,6 +127,7 @@ void WaypointGroupPanel::updatePoiList()
         QListWidgetItem *item = createPoiItem(ui->poiList, id, name);
         ui->poiList->addItem(item);
     }
+
 }
 
 void WaypointGroupPanel::groupChanged(const QString &group)
