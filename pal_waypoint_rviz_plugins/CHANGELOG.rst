@@ -2,6 +2,11 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix crashes when poi and wpgroup params had wrong types
+* Contributors: Víctor López
+
 0.0.8 (2015-03-02)
 ------------------
 * Added pluginlib dependency

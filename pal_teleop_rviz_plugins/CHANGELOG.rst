@@ -2,6 +2,9 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.0.8 (2015-03-02)
 ------------------
 * Added pluginlib dependency
