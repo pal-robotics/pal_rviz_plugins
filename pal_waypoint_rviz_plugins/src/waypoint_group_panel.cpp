@@ -94,16 +94,7 @@ WaypointGroupPanel::WaypointGroupPanel( QWidget* parent )
     connect(timer, SIGNAL(timeout()), this, SLOT(updatePoiList()));
     timer->start(5000);
     updatePoiList();
-    XmlRpc::XmlRpcValue wpGroups;
-    if (_nh.getParamCached(_groupParam, wpGroups)  &&
-        wpGroups.getType() == XmlRpc::XmlRpcValue::TypeStruct)
-    {
-        for(XmlRpc::XmlRpcValue::iterator it = wpGroups.begin();
-            it != wpGroups.end(); ++it)
-        {
-            ui->groupCombo->addItem(QString::fromStdString(it->first));
-        }
-    }
+
 }
 
 WaypointGroupPanel::~WaypointGroupPanel()
@@ -127,6 +118,21 @@ void WaypointGroupPanel::updatePoiList()
         QListWidgetItem *item = createPoiItem(ui->poiList, id, name);
         ui->poiList->addItem(item);
     }
+
+    QString currentGroup = ui->groupCombo->currentText();
+    XmlRpc::XmlRpcValue wpGroups;
+    if (_nh.getParamCached(_groupParam, wpGroups)  &&
+        wpGroups.getType() == XmlRpc::XmlRpcValue::TypeStruct)
+    {
+        for(XmlRpc::XmlRpcValue::iterator it = wpGroups.begin();
+            it != wpGroups.end(); ++it)
+        {
+          if (ui->groupCombo->findText(QString::fromStdString(it->first)) == -1)
+            ui->groupCombo->addItem(QString::fromStdString(it->first));
+        }
+        ui->groupCombo->setCurrentIndex(ui->groupCombo->findText(currentGroup));
+    }
+
 
 }
 
