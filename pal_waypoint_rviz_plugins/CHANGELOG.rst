@@ -2,6 +2,11 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* waypoint_group_panel will reload waypoint groups
+* Contributors: Víctor López
+
 0.0.9 (2015-03-30)
 ------------------
 * Fix crashes when poi and wpgroup params had wrong types
