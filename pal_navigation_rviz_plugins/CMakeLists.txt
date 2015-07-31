@@ -29,11 +29,20 @@ find_package(catkin REQUIRED COMPONENTS
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+
+find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+include(${QT_USE_FILE})
+
+#Required for catkin_package
+set(QT_INCLUDE_DIRS ${QT_INCLUDE_DIR}
+                    ${QT_QTCORE_INCLUDE_DIR}
+                    ${QT_QTGUI_INCLUDE_DIR})
+
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES pal_navigation_rviz_plugins
-#  CATKIN_DEPENDS roscpp rviz
-#  DEPENDS system_lib
+ INCLUDE_DIRS include
+ LIBRARIES map_management_widget 
+ CATKIN_DEPENDS roscpp
+ DEPENDS QT
 )
 
 ###########
@@ -47,8 +56,6 @@ include_directories(include
                   ${catkin_INCLUDE_DIRS}
 )
 
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-include(${QT_USE_FILE})
 
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
