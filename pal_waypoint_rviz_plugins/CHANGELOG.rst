@@ -2,6 +2,9 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.0.10 (2015-03-30)
 -------------------
 * waypoint_group_panel will reload waypoint groups

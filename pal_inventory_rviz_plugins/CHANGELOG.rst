@@ -2,6 +2,9 @@
 Changelog for package pal_inventory_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.0.10 (2015-03-30)
 -------------------
 
