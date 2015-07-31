@@ -2,8 +2,8 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.0 (2015-07-31)
+------------------
 * Add map_management widget and panel
 * Contributors: Víctor López
 
