@@ -17,4 +17,13 @@
     </description>
   </class>
 </library>
+<library path="lib/libadd_pod_tool">
+  <class name="pal-waypoint_rviz_plugins/AddPod"
+         type="pal::AddPodTool"
+         base_class_type="rviz::Tool">
+    <description>
+        A tool that enables the addition of a new point of direction.
+    </description>
+  </class>
+</library>
 </class_libraries>
