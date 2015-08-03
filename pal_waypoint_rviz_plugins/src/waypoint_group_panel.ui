@@ -33,6 +33,23 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QLabel" name="podLabel">
+       <property name="text">
+        <string>Points of Direction</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="podList">
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::DragOnly</enum>
+       </property>
+       <property name="defaultDropAction">
+        <enum>Qt::MoveAction</enum>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

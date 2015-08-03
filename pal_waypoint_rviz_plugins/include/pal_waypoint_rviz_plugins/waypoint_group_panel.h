@@ -56,7 +56,7 @@ public:
 
 
 public Q_SLOTS:
-  void updatePoiList();
+  void updateParamData();
   void groupChanged(const QString &group);
   void newGroup();
   void delGroup();
@@ -69,10 +69,13 @@ protected:
   void goalActive();
   void goalDone(const actionlib::SimpleClientGoalState& state,
                 const pal_waypoint::DoWaypointNavigationResultConstPtr& result);
+
+  void updatePoData(const std::string &param, QListWidget *list);
   ros::NodeHandle _nh;
 
   Ui::WaypointGroupPanel *ui;
   std::string _poiParam;
+  std::string _podParam;
   std::string _groupParam;
   QString _activeGroup;
   actionlib::SimpleActionClient<pal_waypoint::DoWaypointNavigationAction> _actionClient;
