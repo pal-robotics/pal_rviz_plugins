@@ -45,6 +45,8 @@ void AddPointTool::onPoseSet(double x, double y, double theta)
   QString name = QInputDialog::getText(NULL, "Enter name",
                                        "name:",
                                        QLineEdit::Normal);
+  if (name.isEmpty())
+    return;
   addPointParam(name.toStdString(), mapPose.pose.position.x,
               mapPose.pose.position.y, yaw);
 }

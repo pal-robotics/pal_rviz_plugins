@@ -26,4 +26,13 @@
     </description>
   </class>
 </library>
+<library path="lib/libadd_zoi_tool">
+  <class name="pal-waypoint_rviz_plugins/AddZoi"
+         type="pal::AddZoiTool"
+         base_class_type="rviz::Tool">
+    <description>
+        A tool that enables the addition of a new zone of interest.
+    </description>
+  </class>
+</library>
 </class_libraries>

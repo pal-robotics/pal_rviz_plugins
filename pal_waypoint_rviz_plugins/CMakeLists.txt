@@ -61,6 +61,7 @@ QT4_WRAP_UI(WAYPOINT_GROUP_PANEL_UIS_H src/waypoint_group_panel.ui)
 QT4_WRAP_CPP(ADD_POINT_TOOL_MOC_FILES include/pal_waypoint_rviz_plugins/add_point_tool.h)
 QT4_WRAP_CPP(ADD_POI_TOOL_MOC_FILES include/pal_waypoint_rviz_plugins/add_poi_tool.h)
 QT4_WRAP_CPP(ADD_POD_TOOL_MOC_FILES include/pal_waypoint_rviz_plugins/add_pod_tool.h)
+QT4_WRAP_CPP(ADD_ZOI_TOOL_MOC_FILES include/pal_waypoint_rviz_plugins/add_zoi_tool.h)
 ## Declare a cpp library
  add_library(waypoint_group_panel src/waypoint_group_panel.cpp
                                   ${WAYPOINT_GROUP_PANEL_MOC_FILES}
@@ -81,6 +82,9 @@ target_link_libraries(waypoint_group_panel
  add_library(add_pod_tool         src/add_pod_tool.cpp
                                   ${ADD_POD_TOOL_MOC_FILES})
 
+ add_library(add_zoi_tool         src/add_zoi_tool.cpp
+                                  ${ADD_ZOI_TOOL_MOC_FILES})
+
 # add_dependencies(pal_waypoint_rviz_plugins_node pal_waypoint_rviz_plugins_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
@@ -91,9 +95,11 @@ target_link_libraries(add_poi_tool
     add_point_tool
 )
 target_link_libraries(add_pod_tool
+    add_point_tool
+)
+target_link_libraries(add_zoi_tool
     add_point_tool 
 )
-
 #############
 ## Install ##
 #############
