@@ -1,6 +1,6 @@
 <class_libraries>
 <library path="lib/libwaypoint_group_panel">
-  <class name="pal-waypoint_rviz_plugins/WaypointGroup"
+  <class name="pal-waypoint_rviz_plugins/Waypoint Group"
          type="pal::WaypointGroupPanel"
          base_class_type="rviz::Panel">
     <description>
@@ -8,12 +8,35 @@
     </description>
   </class>
 </library>
-<library path="lib/libadd_poi_tool">
-  <class name="pal-waypoint_rviz_plugins/AddPoi"
+<library path="lib/libadd_point_tool">
+  <class name="pal-waypoint_rviz_plugins/Point of Interest"
          type="pal::AddPoiTool"
          base_class_type="rviz::Tool">
     <description>
         A tool that enables the addition of a new point of interest.
+    </description>
+  </class>
+  <class name="pal-waypoint_rviz_plugins/Point of Direction"
+         type="pal::AddPodTool"
+         base_class_type="rviz::Tool">
+    <description>
+        A tool that enables the addition of a new point of direction.
+    </description>
+  </class>
+</library>
+<library path="lib/libadd_zone_tool">
+  <class name="pal-waypoint_rviz_plugins/Zone of Interest"
+         type="pal::AddZoiTool"
+         base_class_type="rviz::Tool">
+    <description>
+        A tool that enables the addition of a new zone of interest.
+    </description>
+  </class>
+  <class name="pal-waypoint_rviz_plugins/Virtual Obstacle"
+         type="pal::AddVoTool"
+         base_class_type="rviz::Tool">
+    <description>
+        A tool that enables the addition of a new virtual obstacle.
     </description>
   </class>
 </library>

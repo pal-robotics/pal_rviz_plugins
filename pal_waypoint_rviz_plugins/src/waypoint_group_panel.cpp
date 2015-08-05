@@ -75,6 +75,7 @@ WaypointGroupPanel::WaypointGroupPanel( QWidget* parent )
     : rviz::Panel( parent ),
       ui(new Ui::WaypointGroupPanel),
       _poiParam("/mmap/poi/submap_0"),
+      _podParam("/mmap/pod/submap_0"),
       _groupParam("/mmap/poigroup/submap_0/"),
       _activeGroup(""),
       _actionClient("/pal_waypoint/navigate", false),
@@ -91,9 +92,9 @@ WaypointGroupPanel::WaypointGroupPanel( QWidget* parent )
     updateButtonStatus();
 
     QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updatePoiList()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateParamData()));
     timer->start(5000);
-    updatePoiList();
+    updateParamData();
 
 }
 
@@ -102,22 +103,31 @@ WaypointGroupPanel::~WaypointGroupPanel()
     delete ui;
 }
 
-void WaypointGroupPanel::updatePoiList()
+void WaypointGroupPanel::updatePoData(const std::string &param, QListWidget *list)
 {
-    XmlRpc::XmlRpcValue pois;
-    if (!_nh.getParamCached(_poiParam, pois) ||
-        pois.getType() != XmlRpc::XmlRpcValue::TypeStruct)
-        return;
+  XmlRpc::XmlRpcValue pois;
+  if (!_nh.getParamCached(param, pois) ||
+      pois.getType() != XmlRpc::XmlRpcValue::TypeStruct)
+      return;
 
-    ui->poiList->clear();
-    for(XmlRpc::XmlRpcValue::iterator it = pois.begin(); it != pois.end(); ++it)
-    {
-        std::string id = it->first;
-        XmlRpc::XmlRpcValue poi = it->second;
-        std::string name = poi[1];
-        QListWidgetItem *item = createPoiItem(ui->poiList, id, name);
-        ui->poiList->addItem(item);
-    }
+  list->clear();
+  for(XmlRpc::XmlRpcValue::iterator it = pois.begin(); it != pois.end(); ++it)
+  {
+      std::string id = it->first;
+      XmlRpc::XmlRpcValue poi = it->second;
+      std::string name = poi[1];
+      QListWidgetItem *item = createPoiItem(list, id, name);
+      list->addItem(item);
+  }
+}
+
+void WaypointGroupPanel::updateParamData()
+{
+    updatePoData(_poiParam, ui->poiList);
+    updatePoData(_podParam, ui->podList);
+    bool showPods = ui->podList->count() > 0;
+    ui->podLabel->setVisible(showPods);
+    ui->podList->setVisible(showPods);
 
     QString currentGroup = ui->groupCombo->currentText();
     XmlRpc::XmlRpcValue wpGroups;

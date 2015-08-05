@@ -1,12 +1,12 @@
 /*
- *  add_poi_tool.h
+ *
  *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
- *  Created on: 2015
- *      Author:  victor
+ *  Created on: 8/3/2015
+ *      Author: victor
  */
 
-#ifndef ADD_POI_TOOL_H
-#define ADD_POI_TOOL_H
+#ifndef ADDPOINTTOOL_H
+#define ADDPOINTTOOL_H
 
 #ifndef Q_MOC_RUN  // See: https://bugreports.qt-project.org/browse/QTBUG-22829
 # include <QObject>
@@ -23,31 +23,46 @@ class Arrow;
 class DisplayContext;
 class StringProperty;
 
-class AddPoiTool: public rviz::PoseTool
+// Adds tool to add a point to the parameter server
+class AddPointTool: public rviz::PoseTool
 {
 Q_OBJECT
 public:
-  AddPoiTool();
-  virtual ~AddPoiTool() {}
+  AddPointTool(const std::string &paramName);
+  virtual ~AddPointTool() {}
   virtual void onInitialize();
 
 protected:
   virtual void onPoseSet(double x, double y, double theta);
-
-private Q_SLOTS:
-  void updateTopic();
-
-private:
-  void addPoiParam(const std::string &name,
+  virtual void addPointParam(const std::string &name,
                    double x,
                    double y,
                    double theta);
+
+protected:
   ros::NodeHandle _nh;
   tf::TransformListener _tf;
+  std::string _paramName;
 
 };
 
+
+class AddPoiTool: public AddPointTool
+{
+Q_OBJECT
+public:
+  AddPoiTool();
+  virtual void onInitialize();
+};
+
+
+class AddPodTool: public AddPointTool
+{
+Q_OBJECT
+public:
+  AddPodTool();
+  virtual void onInitialize();
+};
 }
 
-
-#endif // ADD_POI_TOOL_H
+#endif // ADDPOINTTOOL_H
