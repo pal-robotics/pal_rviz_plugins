@@ -17,7 +17,8 @@
 namespace pal
 {
 
-AddPointTool::AddPointTool()
+AddPointTool::AddPointTool(const std::string &paramName)
+  : _paramName(paramName)
 {
 }
 
@@ -51,4 +52,50 @@ void AddPointTool::onPoseSet(double x, double y, double theta)
               mapPose.pose.position.y, yaw);
 }
 
-} // end namespace rviz
+
+void AddPointTool::addPointParam(const std::string &name, double x,
+                                 double y, double theta)
+{
+    XmlRpc::XmlRpcValue list;
+    list[0] = "submap_0"; // Hard coded value everywhere until multimaps are introduced
+    list[1] = name;
+    list[2] = x;
+    list[3] = y;
+    list[4] = theta;
+    _nh.setParam(_paramName + name, list);
+}
+
+AddPoiTool::AddPoiTool() :
+  AddPointTool("/mmap/poi/submap_0/")
+{
+}
+
+void AddPoiTool::onInitialize()
+{
+  AddPointTool::onInitialize();
+  setName( "Point of Interest");
+}
+
+
+AddPodTool::AddPodTool()
+  : AddPointTool("/mmap/pod/submap_0/" )
+{
+}
+
+void AddPodTool::onInitialize()
+{
+  AddPointTool::onInitialize();
+  setName( "Point of Direction");
+}
+
+
+
+} // end namespace pal
+
+
+#include <pluginlib/class_list_macros.h>
+PLUGINLIB_EXPORT_CLASS( pal::AddPoiTool, rviz::Tool )
+
+#include <pluginlib/class_list_macros.h>
+PLUGINLIB_EXPORT_CLASS( pal::AddPodTool, rviz::Tool )
+

@@ -28,7 +28,7 @@ class AddPointTool: public rviz::PoseTool
 {
 Q_OBJECT
 public:
-  AddPointTool();
+  AddPointTool(const std::string &paramName);
   virtual ~AddPointTool() {}
   virtual void onInitialize();
 
@@ -37,14 +37,32 @@ protected:
   virtual void addPointParam(const std::string &name,
                    double x,
                    double y,
-                   double theta) = 0;
+                   double theta);
 
 protected:
   ros::NodeHandle _nh;
   tf::TransformListener _tf;
+  std::string _paramName;
 
 };
 
+
+class AddPoiTool: public AddPointTool
+{
+Q_OBJECT
+public:
+  AddPoiTool();
+  virtual void onInitialize();
+};
+
+
+class AddPodTool: public AddPointTool
+{
+Q_OBJECT
+public:
+  AddPodTool();
+  virtual void onInitialize();
+};
 }
 
 #endif // ADDPOINTTOOL_H

@@ -5,7 +5,7 @@
  *      Author: victor
  */
 
-#include <pal_waypoint_rviz_plugins/add_zoi_tool.h>
+#include <pal_waypoint_rviz_plugins/add_zone_tool.h>
 
 #include <qinputdialog.h>
 #include <tf/transform_listener.h>
@@ -19,17 +19,12 @@
 namespace pal
 {
 
-AddZoiTool::AddZoiTool()
+AddZoneTool::AddZoneTool(const std::string &paramName)
+  : AddPointTool(paramName)
 {
 }
 
-void AddZoiTool::onInitialize()
-{
-  AddPointTool::onInitialize();
-  setName( "Add Zone of Interest");
-}
-
-void AddZoiTool::addPointParam(const std::string &name, double x,
+void AddZoneTool::addPointParam(const std::string &name, double x,
                                double y, double theta)
 {
 
@@ -45,16 +40,42 @@ void AddZoiTool::addPointParam(const std::string &name, double x,
   for (int i = 0; i < vertexs; i++)
   {
     std::stringstream ss;
-    ss << "/mmap/zoi/submap_0/" << name << "_" << i;
+    ss << _paramName << name << "_" << i;
     list[2] = x + radius * sin(i * angle);
     list[3] = y + radius * cos(i * angle);
 
     _nh.setParam(ss.str(), list);
   }
 }
+
+
+AddZoiTool::AddZoiTool()
+  : AddZoneTool("/mmap/zoi/submap_0/")
+{
+}
+
+void AddZoiTool::onInitialize()
+{
+  AddZoneTool::onInitialize();
+  setName( "Zone of Interest");
+}
+AddVoTool::AddVoTool()
+  : AddZoneTool("/mmap/vo/submap_0/")
+{
+}
+
+void AddVoTool::onInitialize()
+{
+  AddZoneTool::onInitialize();
+  setName( "Virtual Obstacle");
+}
+
 } // end namespace rviz
 
 #include <pluginlib/class_list_macros.h>
 PLUGINLIB_EXPORT_CLASS( pal::AddZoiTool, rviz::Tool )
+
+#include <pluginlib/class_list_macros.h>
+PLUGINLIB_EXPORT_CLASS( pal::AddVoTool, rviz::Tool )
 
 
