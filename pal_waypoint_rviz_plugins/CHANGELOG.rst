@@ -2,6 +2,14 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add tools for adding zones of interest and virtual obstacles
+* Added add zoi tool
+* Add "add point of direction" rviz tool
+* Add points of direction list
+* Contributors: Víctor López
+
 0.1.1 (2015-07-31)
 ------------------
 
