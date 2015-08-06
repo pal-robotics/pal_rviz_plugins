@@ -2,6 +2,9 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.1.2 (2015-08-05)
 ------------------
 * Add tools for adding zones of interest and virtual obstacles

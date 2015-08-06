@@ -2,6 +2,9 @@
 Changelog for package pal_surveillance_db_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.1.2 (2015-08-05)
 ------------------
 

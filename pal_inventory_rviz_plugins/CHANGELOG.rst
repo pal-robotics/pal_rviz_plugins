@@ -2,6 +2,11 @@
 Changelog for package pal_inventory_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix zoi marker server name
+* Contributors: Víctor López
+
 0.1.2 (2015-08-05)
 ------------------
 
