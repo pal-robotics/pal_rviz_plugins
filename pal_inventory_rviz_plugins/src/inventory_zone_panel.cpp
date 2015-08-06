@@ -22,7 +22,7 @@ InventoryZonePanel::InventoryZonePanel( QWidget* parent )
 
   _sub = _nh.subscribe("/inventory/active_inventory", 1,
                        &InventoryZonePanel::activeInventoryCb, this);
-  _pub = _nh.advertise<std_msgs::String>("/zone_marker_server/regex", 1, true);
+  _pub = _nh.advertise<std_msgs::String>("/zoi_marker_server/regex", 1, true);
 
   ui->allZones->setChecked(true);
   apply();
