@@ -27,6 +27,7 @@ QListWidgetItem *createPoiItem(QListWidget *list, const std::string &id, const s
     // Id is transmitted as user data
     item->setData(Qt::UserRole,
                   QVariant(QString::fromStdString(id)));
+    return item;
 }
 
 
