@@ -83,6 +83,7 @@ WaypointGroupPanel::WaypointGroupPanel( QWidget* parent )
       _goalRunning(false)
 {
     ui->setupUi(this);
+    updateParamData();
     connect(ui->groupCombo, SIGNAL(currentIndexChanged(QString)),this, SLOT(groupChanged(QString)));
     connect(ui->newGroupBut, SIGNAL(clicked()),this, SLOT(newGroup()));
     connect(ui->delGroupBut, SIGNAL(clicked()),this, SLOT(delGroup()));
@@ -95,7 +96,6 @@ WaypointGroupPanel::WaypointGroupPanel( QWidget* parent )
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateParamData()));
     timer->start(5000);
-    updateParamData();
 
 }
 
@@ -165,6 +165,8 @@ void WaypointGroupPanel::groupChanged(const QString &group)
         std::string poiId = groupParam[i];
         XmlRpc::XmlRpcValue param;
         if (_nh.getParamCached(_poiParam + "/" + poiId, param))
+            ui->groupList->addItem(createPoiItem(ui->groupList, poiId, param[1]));
+        else if (_nh.getParamCached(_podParam + "/" + poiId, param))
             ui->groupList->addItem(createPoiItem(ui->groupList, poiId, param[1]));
     }
 }
