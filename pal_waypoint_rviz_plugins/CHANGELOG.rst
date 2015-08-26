@@ -2,6 +2,12 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix missing PoD when loading groups from param server
+* Add missing return value
+* Contributors: Víctor López
+
 0.1.3 (2015-08-06)
 ------------------
 
