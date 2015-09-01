@@ -110,7 +110,7 @@ QT4_WRAP_CPP(PAL_JOYSTICK_PANEL_MOC_FILES include/pal_teleop_rviz_plugins/pal_jo
 QT4_ADD_RESOURCES(QT_RESOURCES_CPP ${QT_RESOURCES})
 QT4_WRAP_UI(PAL_TELEOP_PANEL_UIS_H src/pal_teleop_panel.ui)
 
-add_library(pal_joystick STATIC src/pal_joystick.cpp
+add_library(pal_joystick src/pal_joystick.cpp
                                 ${PAL_JOYSTICK_PANEL_MOC_FILES}
                                 ${QT_RESOURCES_CPP})
 
@@ -151,7 +151,7 @@ endif(CATKIN_ENABLE_TESTING)
 # )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS pal_teleop_panel
+install(TARGETS pal_joystick pal_teleop_panel
   #ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   #RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
