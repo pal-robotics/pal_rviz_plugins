@@ -6,6 +6,7 @@
  */
 #include "map_management_panel.h"
 #include <pal_navigation_rviz_plugins/map_management_widget.h>
+#include <pal_navigation_rviz_plugins/map_configuration_widget.h>
 #include <QHBoxLayout>
 namespace pal
 {
@@ -13,8 +14,9 @@ namespace pal
 MapManagementPanel::MapManagementPanel( QWidget* parent )
   : rviz::Panel( parent )
 {
-  QHBoxLayout *layout = new QHBoxLayout;
+  QVBoxLayout *layout = new QVBoxLayout;
   setLayout(layout);
+  layout->addWidget(new map_configuration_widget(this));
   layout->addWidget(new MapManagementWidget(this));
 }
 

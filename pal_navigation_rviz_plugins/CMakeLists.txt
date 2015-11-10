@@ -45,6 +45,8 @@ catkin_package(
  DEPENDS QT
 )
 
+set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
+
 ###########
 ## Build ##
 ###########
@@ -61,12 +63,20 @@ include_directories(include
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
 
+QT4_WRAP_CPP(MAP_CONFIGURATION_WIDGET_MOC_FILES include/pal_navigation_rviz_plugins/map_configuration_widget.h)
+#QT4_WRAP_CPP(MAP_CONFIGURATION_PANEL_MOC_FILES src/map_configuration_panel.h)
+QT4_WRAP_UI(MAP_CONFIGURATION_WIDGET_UIS_H src/map_configuration_widget.ui)
+
 QT4_WRAP_CPP(MAP_MANAGEMENT_WIDGET_MOC_FILES include/pal_navigation_rviz_plugins/map_management_widget.h)
 QT4_WRAP_CPP(MAP_MANAGEMENT_PANEL_MOC_FILES src/map_management_panel.h)
 QT4_WRAP_UI(MAP_MANAGEMENT_WIDGET_UIS_H src/map_management_widget.ui)
 
 
 ## Declare a cpp library
+ add_library(map_configuration_widget src/map_configuration_widget.cpp
+                                  ${MAP_CONFIGURATION_WIDGET_MOC_FILES}
+                                  ${MAP_CONFIGURATION_WIDGET_UIS_H})
+
  add_library(map_management_widget src/map_management_widget.cpp
                                   ${MAP_MANAGEMENT_WIDGET_MOC_FILES}
                                   ${MAP_MANAGEMENT_WIDGET_UIS_H})
@@ -82,8 +92,14 @@ target_link_libraries(map_management_widget
   ${catkin_LIBRARIES}
 )
 
+target_link_libraries(map_configuration_widget
+  ${catkin_LIBRARIES}
+  ${QT_LIBRARIES}
+)
+
 target_link_libraries(map_management_panel
   map_management_widget
+  map_configuration_widget
 )
 
 #############
@@ -107,7 +123,7 @@ install(DIRECTORY include/${PROJECT_NAME}/
 )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS map_management_widget map_management_panel
+install(TARGETS map_management_widget map_management_panel map_configuration_widget
   #ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   #RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -122,3 +138,8 @@ install(TARGETS map_management_widget map_management_panel
 install(FILES plugin_description.xml
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
+if(CATKIN_ENABLE_TESTING)
+    # This is not an unit test, just an executable to visualize the rviz panel
+    add_executable(map_configuration_widget_test test/map_configuration_widget_test.cpp)
+    target_link_libraries(map_configuration_widget_test map_configuration_widget)
+endif(CATKIN_ENABLE_TESTING)
