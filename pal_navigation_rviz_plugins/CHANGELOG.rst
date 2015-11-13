@@ -2,8 +2,8 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.5 (2015-11-13)
+------------------
 * Add map_configuration_widget to change maps in local or remote computers
   fixes #11826
 * Contributors: Víctor López
