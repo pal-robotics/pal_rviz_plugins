@@ -2,6 +2,11 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Made pal_joystick a dynamic library
+* Contributors: Víctor López
+
 0.1.4 (2015-08-26)
 ------------------
 
