@@ -2,8 +2,8 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.6 (2015-11-27)
+------------------
 * Check for valid names of pois, pods, zois and vos
 * Contributors: Victor Lopez
 
