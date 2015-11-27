@@ -8,7 +8,8 @@
 
 #include <pal_waypoint_rviz_plugins/add_point_tool.h>
 
-#include <qinputdialog.h>
+#include <QInputDialog>
+#include <QMessageBox>
 #include <tf/transform_listener.h>
 
 #include <geometry_msgs/PoseStamped.h>
@@ -43,11 +44,26 @@ void AddPointTool::onPoseSet(double x, double y, double theta)
 
   tf::quaternionMsgToTF(pose.pose.orientation, quat);
   double yaw = tf::getYaw(pose.pose.orientation);
-  QString name = QInputDialog::getText(NULL, "Enter name",
-                                       "name:",
-                                       QLineEdit::Normal);
-  if (name.isEmpty())
-    return;
+
+  QString nameRegex = QString("([a-z]|[A-Z]|[0-9]|_)+");
+  QString name;
+  while (true)
+  {
+    name = QInputDialog::getText(NULL, "Enter name",
+                                         "name:",
+                                         QLineEdit::Normal);
+    if (name.isEmpty())
+      return;
+
+    QRegExp validName(nameRegex);
+    if (validName.exactMatch(name))
+      break;
+
+    QMessageBox box(QMessageBox::Warning, "Invalid name", "Please enter a valid name, containing only "
+                "English characters, numbers and the underscore symbol");
+    box.exec();
+  }
+
   addPointParam(name.toStdString(), mapPose.pose.position.x,
               mapPose.pose.position.y, yaw);
 }
