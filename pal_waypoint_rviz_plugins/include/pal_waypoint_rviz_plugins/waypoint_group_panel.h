@@ -15,7 +15,7 @@
 #endif
 #include <qlistwidget.h>
 #include <actionlib/client/simple_action_client.h>
-#include <pal_waypoint/DoWaypointNavigationAction.h>
+#include <pal_waypoint_msgs/DoWaypointNavigationAction.h>
 
 class QLineEdit;
 
@@ -68,7 +68,7 @@ protected:
   void updateButtonStatus() const;
   void goalActive();
   void goalDone(const actionlib::SimpleClientGoalState& state,
-                const pal_waypoint::DoWaypointNavigationResultConstPtr& result);
+                const pal_waypoint_msgs::DoWaypointNavigationResultConstPtr& result);
 
   void updatePoData(const std::string &param, QListWidget *list);
   ros::NodeHandle _nh;
@@ -78,7 +78,7 @@ protected:
   std::string _podParam;
   std::string _groupParam;
   QString _activeGroup;
-  actionlib::SimpleActionClient<pal_waypoint::DoWaypointNavigationAction> _actionClient;
+  actionlib::SimpleActionClient<pal_waypoint_msgs::DoWaypointNavigationAction> _actionClient;
   bool _goalRunning;
 
 

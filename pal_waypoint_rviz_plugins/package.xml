@@ -32,7 +32,7 @@
   <depend>pluginlib</depend>
   <depend>roscpp</depend>
   <depend>rviz</depend>
-  <depend>pal_waypoint</depend>
+  <depend>pal_waypoint_msgs</depend>
   <depend>tf</depend>
 
 

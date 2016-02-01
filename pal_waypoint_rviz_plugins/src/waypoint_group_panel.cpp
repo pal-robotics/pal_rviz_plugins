@@ -12,7 +12,6 @@
 #include <QInputDialog>
 
 #include <pal_waypoint_rviz_plugins/waypoint_group_panel.h>
-#include <pal_waypoint/DoWaypointNavigationAction.h>
 
 #include "ui_waypoint_group_panel.h"
 
@@ -195,7 +194,7 @@ void WaypointGroupPanel::runGroup()
         return;
     }
 
-    pal_waypoint::DoWaypointNavigationGoal goal;
+    pal_waypoint_msgs::DoWaypointNavigationGoal goal;
     goal.group = _activeGroup.toStdString();
     _actionClient.sendGoal(goal,
                            boost::bind(&WaypointGroupPanel::goalDone, this, _1, _2),
@@ -242,8 +241,8 @@ void WaypointGroupPanel::goalActive()
     updateButtonStatus();
 }
 
-void WaypointGroupPanel::goalDone(const actionlib::SimpleClientGoalState& state,
-                                  const pal_waypoint::DoWaypointNavigationResultConstPtr& result)
+void WaypointGroupPanel::goalDone(const actionlib::SimpleClientGoalState &,
+                                  const pal_waypoint_msgs::DoWaypointNavigationResultConstPtr &)
 {
     _goalRunning = false;
     updateButtonStatus();
