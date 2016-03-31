@@ -2,6 +2,11 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Change dependency on pal_waypoint to pal_waypoint_msgs
+* Contributors: Victor Lopez
+
 0.1.6 (2015-11-27)
 ------------------
 * Check for valid names of pois, pods, zois and vos
