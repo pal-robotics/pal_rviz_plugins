@@ -2,8 +2,8 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.0 (2016-03-31)
+------------------
 * Change dependency on pal_waypoint to pal_waypoint_msgs
 * Contributors: Victor Lopez
 
