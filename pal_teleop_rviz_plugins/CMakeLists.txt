@@ -128,6 +128,7 @@ add_library(pal_teleop_panel src/pal_teleop_panel.cpp
 ## Specify libraries to link a library or executable target against
 target_link_libraries(pal_teleop_panel
   pal_joystick
+  ${QT_LIBRARIES}
   ${catkin_LIBRARIES}
 )
 

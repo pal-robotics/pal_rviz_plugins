@@ -70,7 +70,8 @@ QT4_WRAP_CPP(ADD_ZONE_TOOL_MOC_FILES include/pal_waypoint_rviz_plugins/add_zone_
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(waypoint_group_panel
-  ${catkin_LIBRARIES}
+${QT_LIBRARIES}
+${catkin_LIBRARIES}
 )
  add_library(add_point_tool         src/add_point_tool.cpp
                                   ${ADD_POINT_TOOL_MOC_FILES})
@@ -83,6 +84,7 @@ target_link_libraries(waypoint_group_panel
 ## Specify libraries to link a library or executable target against
 target_link_libraries(add_point_tool
   ${catkin_LIBRARIES}
+  ${QT_LIBRARIES}
 )
 target_link_libraries(add_zone_tool
     add_point_tool 
