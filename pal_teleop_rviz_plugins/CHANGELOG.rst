@@ -2,6 +2,11 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix missing link libraries
+* Contributors: Victor Lopez
+
 1.0.0 (2016-03-31)
 ------------------
 
