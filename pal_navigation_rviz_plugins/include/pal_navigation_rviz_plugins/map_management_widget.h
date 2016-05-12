@@ -10,7 +10,7 @@
 
 #include <ros/ros.h>
 #include <qwidget.h>
-
+#include <pal_navigation_msgs/NavigationStatus.h>
 namespace pal
 {
 
@@ -28,13 +28,19 @@ public:
 
 public Q_SLOTS:
   void saveMapConfig();
+  void startMapping();
+  void stopMapping();
 
 
 
 private:
-  Ui::MapManagementWidgetUI *ui;
-  ros::NodeHandle _nh;
-  ros::ServiceClient _client;
+  void smStateCb(const pal_navigation_msgs::NavigationStatusConstPtr &msg);
+
+  Ui::MapManagementWidgetUI *ui_;
+  ros::NodeHandle nh_;
+  ros::ServiceClient poi_changed_client_;
+  ros::ServiceClient navigation_sm_client_;
+  ros::Subscriber navigation_sm_state_sub_;
 };
 
 } // pal

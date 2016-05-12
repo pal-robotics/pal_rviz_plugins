@@ -6,6 +6,7 @@ project(pal_navigation_rviz_plugins)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   std_srvs
+  pal_navigation_msgs
   pluginlib
   roscpp
   rviz

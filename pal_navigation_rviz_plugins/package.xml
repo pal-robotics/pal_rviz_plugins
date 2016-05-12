@@ -33,6 +33,7 @@
   <depend>roscpp</depend>
   <depend>rviz</depend>
   <depend>std_srvs</depend>
+  <depend>pal_navigation_msgs</depend>
   <depend>tf</depend>
 
 
