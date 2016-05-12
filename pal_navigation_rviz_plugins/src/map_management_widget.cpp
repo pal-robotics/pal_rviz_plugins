@@ -33,14 +33,12 @@ MapManagementWidget::~MapManagementWidget()
 
 void MapManagementWidget::smStateCb(const pal_navigation_msgs::NavigationStatusConstPtr &msg)
 {
-  pal_navigation_msgs::NavigationStatus s;
-
-  if (msg->status.data == "LOC" && (!ui_->start_mapping->isEnabled()))
+  if (msg->status.data == "LOC")
   {
     ui_->start_mapping->setEnabled(true);
     ui_->stop_mapping->setEnabled(false);
   }
-  else if (msg->status.data == "MAP" && (!ui_->stop_mapping->isEnabled()))
+  else if (msg->status.data == "MAP")
   {
     ui_->start_mapping->setEnabled(false);
     ui_->stop_mapping->setEnabled(true);

@@ -25,9 +25,9 @@ std::string getInventoryDir()
 {
   std::string host = ros::master::getHost();
   if (host == "localhost")
-    return "~/inventories/";
+    return "~/inventory/";
   else
-    return "\\$HOME/inventories/";
+    return "\\$HOME/inventory/";
 }
 
 /**
