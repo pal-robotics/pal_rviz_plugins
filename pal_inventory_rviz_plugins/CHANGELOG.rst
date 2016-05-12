@@ -2,8 +2,8 @@
 Changelog for package pal_inventory_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.2 (2016-05-12)
+------------------
 * Add rviz panel to download, delete and rename inventories
   fixes #13550
 * Contributors: Victor Lopez
