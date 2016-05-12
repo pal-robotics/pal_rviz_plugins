@@ -58,7 +58,7 @@ void InventoryZonePanel::apply()
     case SHOW_ACTIVE:
       // The regex will have the format "^(ZONEA|ZONEB)$"
       // It will only match ZONEA or ZONEB
-      for (int i = 0; i < _msg.valid_zois.size(); ++i)
+      for (size_t i = 0; i < _msg.valid_zois.size(); ++i)
       {
         std::string zoi = _msg.valid_zois[i];
         if (regex.empty())
@@ -73,7 +73,6 @@ void InventoryZonePanel::apply()
       regex = ""; // match nothing
       break;
     case SHOW_ALL:
-    default:
       regex = ".*"; // match all
       break;
   }

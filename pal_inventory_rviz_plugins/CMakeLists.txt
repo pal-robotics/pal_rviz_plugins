@@ -40,6 +40,7 @@ catkin_package(
 ## Build ##
 ###########
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(include
@@ -53,12 +54,27 @@ include(${QT_USE_FILE})
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
+QT4_WRAP_CPP(INVENTORY_CONFIGURATION_WIDGET_MOC_FILES include/pal_inventory_rviz_plugins/inventory_configuration_widget.h)
+QT4_WRAP_UI(INVENTORY_CONFIGURATION_WIDGET_UIS_H src/inventory_configuration_widget.ui)
+
+QT4_WRAP_CPP(INVENTORY_MANAGEMENT_PANEL_MOC_FILES src/inventory_management_panel.h)
+
+
 
 QT4_WRAP_CPP(INVENTORY_ZONE_PANEL_MOC_FILES include/pal_inventory_rviz_plugins/inventory_zone_panel.h)
 QT4_WRAP_UI(INVENTORY_ZONE_PANEL_UIS_H src/inventory_zone_panel.ui)
 
 
+
+
 ## Declare a cpp library
+ add_library(inventory_configuration_widget src/inventory_configuration_widget.cpp
+                                  ${INVENTORY_CONFIGURATION_WIDGET_MOC_FILES}
+                                  ${INVENTORY_CONFIGURATION_WIDGET_UIS_H})
+
+ add_library(inventory_management_panel src/inventory_management_panel.cpp
+                                  ${INVENTORY_MANAGEMENT_PANEL_MOC_FILES})
+
  add_library(inventory_zone_panel src/inventory_zone_panel.cpp
                                   ${INVENTORY_ZONE_PANEL_MOC_FILES}
                                   ${INVENTORY_ZONE_PANEL_UIS_H})
@@ -66,6 +82,15 @@ QT4_WRAP_UI(INVENTORY_ZONE_PANEL_UIS_H src/inventory_zone_panel.ui)
 # add_dependencies(pal_inventory_rviz_plugins_node pal_inventory_rviz_plugins_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
+target_link_libraries(inventory_configuration_widget
+  ${catkin_LIBRARIES}
+  ${QT_LIBRARIES}
+)
+
+target_link_libraries(inventory_management_panel
+  inventory_configuration_widget
+)
+
 target_link_libraries(inventory_zone_panel
   ${catkin_LIBRARIES}
 )
@@ -85,7 +110,7 @@ target_link_libraries(inventory_zone_panel
 # )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS inventory_zone_panel
+install(TARGETS inventory_zone_panel inventory_management_panel inventory_configuration_widget
   #ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   #RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

@@ -8,4 +8,13 @@
     </description>
   </class>
 </library>
+<library path="lib/libinventory_management_panel">
+  <class name="pal-inventory_rviz_plugins/Inventory Management"
+         type="pal::InventoryManagementPanel"
+         base_class_type="rviz::Panel">
+    <description>
+        A panel allowing to modify and download inventories
+    </description>
+  </class>
+</library>
 </class_libraries>

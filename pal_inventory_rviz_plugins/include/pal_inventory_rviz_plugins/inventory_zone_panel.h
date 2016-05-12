@@ -14,7 +14,7 @@
 # include <rviz/panel.h>
 #endif
 #include <pal_inventory_msgs/ActiveInventory.h>
-
+#include <QObject>
 class QLineEdit;
 
 namespace pal
