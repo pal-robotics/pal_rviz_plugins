@@ -2,6 +2,11 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Change inventories dir name and fix refresh button issue
+* Contributors: Victor Lopez
+
 1.0.2 (2016-05-12)
 ------------------
 * Add starta and stop mapping buttons
