@@ -2,6 +2,11 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add starta and stop mapping buttons
+* Contributors: Victor Lopez
+
 1.0.1 (2016-04-01)
 ------------------
 
