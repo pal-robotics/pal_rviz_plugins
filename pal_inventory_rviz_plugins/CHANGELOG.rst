@@ -2,8 +2,8 @@
 Changelog for package pal_inventory_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.3 (2016-05-12)
+------------------
 * Change inventories dir name and fix refresh button issue
 * Contributors: Victor Lopez
 
