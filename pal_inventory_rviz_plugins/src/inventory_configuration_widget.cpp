@@ -156,14 +156,14 @@ void inventory_configuration_widget::renameInventory()
 {
   std::string inventory = getSelectedInventory();
 
-  QRegExp regexp("[A-Z0-9_]+",Qt::CaseInsensitive);
+  QRegExp regexp("[A-Z0-9_\-]+",Qt::CaseInsensitive);
   QString name = QString::fromStdString(inventory);
   bool ok = false;
   do
   {
     name = QInputDialog::getText(this, "Enter new inventory name",
                                  QString::fromStdString("Please enter new name for inventory " + inventory +
-                                                        " (only letters, numbers and underscores)"),
+                                                        " (only letters, numbers, - and _ )"),
                                  QLineEdit::EchoMode::Normal, name, &ok);
   }
   while (ok && !regexp.exactMatch(name));
