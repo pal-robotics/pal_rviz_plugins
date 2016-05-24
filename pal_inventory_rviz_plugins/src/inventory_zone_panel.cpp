@@ -1,6 +1,6 @@
 /*
  *  inventory_zone_panel.cpp
- *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
+ *  Copyright (c) 2015 PAL Robotics sl. All Rights gserved
  *  Created on: 2015
  *      Author:  victor
  */
@@ -24,6 +24,7 @@ InventoryZonePanel::InventoryZonePanel( QWidget* parent )
                        &InventoryZonePanel::activeInventoryCb, this);
   _pub = _nh.advertise<std_msgs::String>("/zoi_marker_server/regex", 1, true);
 
+  _mode = SHOW_ALL;
   ui->allZones->setChecked(true);
   apply();
 }
