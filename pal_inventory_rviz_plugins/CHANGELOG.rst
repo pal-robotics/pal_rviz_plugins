@@ -2,8 +2,8 @@
 Changelog for package pal_inventory_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.4 (2016-05-24)
+------------------
 * Allow hyphens (-) in inventory names
 * Always show all when zoi marker server is started
 * Contributors: Victor Lopez
