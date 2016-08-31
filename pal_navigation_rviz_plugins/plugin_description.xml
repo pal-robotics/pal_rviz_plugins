@@ -8,4 +8,13 @@
     </description>
   </class>
 </library>
+<library path="lib/libnavigation_utils_panel">
+  <class name="pal-navigation_rviz_plugins/NavigationUtilsPanel"
+         type="pal::NavigationUtilsPanel"
+         base_class_type="rviz::Panel">
+    <description>
+        A panel containing navigation utils
+    </description>
+  </class>
+</library>
 </class_libraries>

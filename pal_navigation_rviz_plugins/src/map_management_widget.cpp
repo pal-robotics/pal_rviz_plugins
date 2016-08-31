@@ -81,3 +81,4 @@ void MapManagementWidget::stopMapping()
 }
 
 } // end namespace pal
+

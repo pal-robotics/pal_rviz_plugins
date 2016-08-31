@@ -34,6 +34,11 @@
   <depend>rviz</depend>
   <depend>std_srvs</depend>
   <depend>pal_navigation_msgs</depend>
+  <depend>laser_pattern_detector_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>rosconsole_bridge</depend>
+  <depend>pal_composite_navigation_msgs</depend>
+  <depend>actionlib</depend>
   <depend>tf</depend>
 
 

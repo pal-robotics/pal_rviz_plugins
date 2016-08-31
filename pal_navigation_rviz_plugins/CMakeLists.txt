@@ -7,10 +7,15 @@ project(pal_navigation_rviz_plugins)
 find_package(catkin REQUIRED COMPONENTS
   std_srvs
   pal_navigation_msgs
+  laser_pattern_detector_msgs
+  pal_composite_navigation_msgs
   pluginlib
   roscpp
-  rviz
+  roslib
   tf
+  rviz
+  cv_bridge
+  actionlib
 )
 
 ## System dependencies are found with CMake's conventions
@@ -54,7 +59,8 @@ set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include
+include_directories(include)
+include_directories(SYSTEM
                   ${CMAKE_CURRENT_BINARY_DIR} # Auto generated qt headers go here
                   ${catkin_INCLUDE_DIRS}
 )
@@ -65,6 +71,7 @@ include_directories(include
 add_definitions(-DQT_NO_KEYWORDS)
 
 set(NAVIGATION_WIDGETS map_configuration_widget map_management_widget)
+set(NAVIGATION_WIDGETS map_configuration_widget map_management_widget navigation_utils_panel)
 foreach(widget ${NAVIGATION_WIDGETS})
     QT4_WRAP_CPP(${widget}_MOC_FILES include/${PROJECT_NAME}/${widget}.h)
     QT4_WRAP_UI(${widget}_UIS_H src/${widget}.ui)
