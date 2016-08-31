@@ -2,8 +2,8 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.5 (2016-08-31)
+------------------
 * Add navigation utils package
 * Reorganize how widgets are handled in CMakeLists for easier expansion
 * Contributors: Victor Lopez
