@@ -111,12 +111,14 @@ void NavigationUtilsPanel::cancelNavGoal()
 void NavigationUtilsPanel::goalActive()
 {
   ui->feedbackText->setText(QString::fromStdString(_ac.getState().toString()));
+  ui->cancelNavGoal->setEnabled(true);
 }
 
 void NavigationUtilsPanel::goalDone(const actionlib::SimpleClientGoalState &state,
                             const pal_composite_navigation_msgs::GoToFloorPOIResultConstPtr &result)
 {
   ui->feedbackText->setText(QString::fromStdString(state.toString()));
+  ui->cancelNavGoal->setEnabled(false);
 }
 }
 #include <pluginlib/class_list_macros.h>
