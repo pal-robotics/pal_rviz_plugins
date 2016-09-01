@@ -2,6 +2,11 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Enable and disable cancel goal button
+* Contributors: Victor Lopez
+
 1.0.5 (2016-08-31)
 ------------------
 * Add navigation utils package
