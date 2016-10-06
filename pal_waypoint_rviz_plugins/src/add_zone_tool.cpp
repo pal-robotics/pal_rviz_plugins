@@ -25,7 +25,7 @@ AddZoneTool::AddZoneTool(const std::string &paramName)
 }
 
 void AddZoneTool::addPointParam(const std::string &name, double x,
-                               double y, double theta)
+                               double y, double)
 {
 
   int vertexs = QInputDialog::getInt(NULL, "How many vertexs for the zone?",
@@ -34,7 +34,7 @@ void AddZoneTool::addPointParam(const std::string &name, double x,
   XmlRpc::XmlRpcValue list;
   list[0] = "submap_0"; // Hard coded value everywhere until multimaps are introduced
   list[1] = name;
-  list[4] = theta;
+  list[4] = 0.0;
   double radius = 2.0;
   double angle = 2*M_PI/vertexs;
   for (int i = 0; i < vertexs; i++)
