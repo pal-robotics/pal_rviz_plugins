@@ -17,4 +17,13 @@
     </description>
   </class>
 </library>
+<library path="lib/libdock_undock">
+  <class name="pal-navigation_rviz_plugins/DockUndockPanel"
+         type="pal::DockUndockPanel"
+         base_class_type="rviz::Panel">
+    <description>
+        A panel for docking and undocking
+    </description>
+  </class>
+</library>
 </class_libraries>

@@ -70,8 +70,11 @@ include_directories(SYSTEM
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
 
-set(NAVIGATION_WIDGETS map_configuration_widget map_management_widget)
-set(NAVIGATION_WIDGETS map_configuration_widget map_management_widget navigation_utils_panel)
+set(NAVIGATION_WIDGETS
+    map_configuration_widget
+    map_management_widget
+    navigation_utils_panel
+    dock_undock)
 foreach(widget ${NAVIGATION_WIDGETS})
     QT4_WRAP_CPP(${widget}_MOC_FILES include/${PROJECT_NAME}/${widget}.h)
     QT4_WRAP_UI(${widget}_UIS_H src/${widget}.ui)
