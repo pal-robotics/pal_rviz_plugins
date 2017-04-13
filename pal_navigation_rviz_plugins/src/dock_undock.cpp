@@ -46,10 +46,9 @@ void DockUndockPanel::Dock()
 {
   dock_charge_sm_msgs::GoAndDockGoal goal;
   goal.use_current_pose = true;
-  _dock_ac.sendGoal(goal, boost::bind(&DockUndockPanel::dockGoalActive, this));
-//               boost::bind(&DockUndockPanel::dockGoalDone, this, _1, _2),
-//               boost::bind(&DockUndockPanel::dockGoalActive, this));
-//  _dock_ac.sendGoal(goal);
+  _dock_ac.sendGoal(goal,
+               boost::bind(&DockUndockPanel::dockGoalDone, this, _1, _2),
+               boost::bind(&DockUndockPanel::dockGoalActive, this));
 }
 
 void DockUndockPanel::cancelDockUndock()
@@ -83,7 +82,7 @@ void DockUndockPanel::undockGoalDone(
 
 void DockUndockPanel::dockGoalDone(
     const actionlib::SimpleClientGoalState &state,
-    const dock_charge_sm_msgs::GoAndDockActionResultConstPtr &result)
+    const dock_charge_sm_msgs::GoAndDockResultConstPtr &result)
 {
   ui->feedbackText->setText(QString::fromStdString(state.toString()));
   ui->cancelDockUndock->setEnabled(false);

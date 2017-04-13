@@ -45,9 +45,8 @@ private:
           const laser_servoing_msgs::UndockResultConstPtr &result);
   void undockGoalActive();
 
-  void dockGoalDone(
-          const actionlib::SimpleClientGoalState &state,
-          const dock_charge_sm_msgs::GoAndDockActionResultConstPtr &result);
+  void dockGoalDone(const actionlib::SimpleClientGoalState &state,
+          const dock_charge_sm_msgs::GoAndDockResultConstPtr &result);
   void dockGoalActive();
 };
 } //namespace
