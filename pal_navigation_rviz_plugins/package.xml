@@ -40,6 +40,8 @@
   <depend>pal_composite_navigation_msgs</depend>
   <depend>actionlib</depend>
   <depend>tf</depend>
+  <depend>laser_servoing_msgs</depend>
+  <depend>dock_charge_sm_msgs</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
