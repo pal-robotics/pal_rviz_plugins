@@ -47,7 +47,6 @@ set(QT_INCLUDE_DIRS ${QT_INCLUDE_DIR}
                     ${QT_QTGUI_INCLUDE_DIR})
 
 catkin_package(
- INCLUDE_DIRS include
  LIBRARIES map_management_widget 
  CATKIN_DEPENDS roscpp
  DEPENDS QT
@@ -101,13 +100,6 @@ target_link_libraries(map_management_panel
 
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
-
-
-## Mark cpp header files for installation
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h"
-)
 
 ## Mark executables and/or libraries for installation
 install(TARGETS ${NAVIGATION_WIDGETS} map_management_panel
