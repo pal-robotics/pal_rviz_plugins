@@ -9,6 +9,8 @@ find_package(catkin REQUIRED COMPONENTS
   pal_navigation_msgs
   laser_pattern_detector_msgs
   pal_composite_navigation_msgs
+  dock_charge_sm_msgs
+  laser_servoing_msgs
   pluginlib
   roscpp
   roslib
@@ -45,7 +47,6 @@ set(QT_INCLUDE_DIRS ${QT_INCLUDE_DIR}
                     ${QT_QTGUI_INCLUDE_DIR})
 
 catkin_package(
- INCLUDE_DIRS include
  LIBRARIES map_management_widget 
  CATKIN_DEPENDS roscpp
  DEPENDS QT
@@ -70,8 +71,11 @@ include_directories(SYSTEM
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
 
-set(NAVIGATION_WIDGETS map_configuration_widget map_management_widget)
-set(NAVIGATION_WIDGETS map_configuration_widget map_management_widget navigation_utils_panel)
+set(NAVIGATION_WIDGETS
+    map_configuration_widget
+    map_management_widget
+    navigation_utils_panel
+    dock_undock)
 foreach(widget ${NAVIGATION_WIDGETS})
     QT4_WRAP_CPP(${widget}_MOC_FILES include/${PROJECT_NAME}/${widget}.h)
     QT4_WRAP_UI(${widget}_UIS_H src/${widget}.ui)
@@ -96,13 +100,6 @@ target_link_libraries(map_management_panel
 
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
-
-
-## Mark cpp header files for installation
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h"
-)
 
 ## Mark executables and/or libraries for installation
 install(TARGETS ${NAVIGATION_WIDGETS} map_management_panel
