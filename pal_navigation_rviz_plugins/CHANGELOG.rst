@@ -2,6 +2,14 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* removed install rules for headers
+* added missing dependencies
+* fixed action client bindings
+* added dock undock panel
+* Contributors: Procópio Stein
+
 1.0.7 (2016-10-06)
 ------------------
 

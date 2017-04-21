@@ -2,6 +2,9 @@
 Changelog for package pal_waypoint_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.0.7 (2016-10-06)
 ------------------
 * Set theta to 0.0 to workaround an error in VO server
