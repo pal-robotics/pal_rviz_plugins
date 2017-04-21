@@ -2,8 +2,8 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.8 (2017-04-21)
+------------------
 * removed install rules for headers
 * added missing dependencies
 * fixed action client bindings
