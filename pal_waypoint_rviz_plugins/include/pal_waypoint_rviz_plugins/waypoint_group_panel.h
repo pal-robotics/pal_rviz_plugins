@@ -8,14 +8,14 @@
 #ifndef WAYPOINT_GROUP_PANEL_H
 #define WAYPOINT_GROUP_PANEL_H
 
-#ifndef Q_MOC_RUN
+#ifndef Q_MOC_RUN  // See: https://bugreports.qt-project.org/browse/QTBUG-22829
 # include <ros/ros.h>
 
 # include <rviz/panel.h>
-#endif
-#include <qlistwidget.h>
 #include <actionlib/client/simple_action_client.h>
 #include <pal_waypoint_msgs/DoWaypointNavigationAction.h>
+#endif
+#include <qlistwidget.h>
 
 class QLineEdit;
 

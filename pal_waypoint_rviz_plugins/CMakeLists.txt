@@ -48,36 +48,41 @@ include_directories(SYSTEM
                   ${catkin_INCLUDE_DIRS}
 )
 
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-include(${QT_USE_FILE})
+## This setting causes Qt's "MOC" generation to happen automatically.
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+if(rviz_QT_VERSION VERSION_LESS "5")
+    message(STATUS "Using Qt4 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+    find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+    include(${QT_USE_FILE})
+else()
+    message(STATUS "Using Qt5 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+    find_package(Qt5 ${rviz_QT_VERSION} EXACT REQUIRED Core Widgets)
+    ## make target_link_libraries(${QT_LIBRARIES}) pull in all required dependencies
+    set(QT_LIBRARIES Qt5::Widgets)
+endif()
 
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
 
-QT4_WRAP_CPP(WAYPOINT_GROUP_PANEL_MOC_FILES test/qros_spinner.h include/pal_waypoint_rviz_plugins/waypoint_group_panel.h)
-QT4_WRAP_UI(WAYPOINT_GROUP_PANEL_UIS_H src/waypoint_group_panel.ui)
-
-
-QT4_WRAP_CPP(ADD_POINT_TOOL_MOC_FILES include/pal_waypoint_rviz_plugins/add_point_tool.h)
-QT4_WRAP_CPP(ADD_ZONE_TOOL_MOC_FILES include/pal_waypoint_rviz_plugins/add_zone_tool.h)
 ## Declare a cpp library
- add_library(waypoint_group_panel src/waypoint_group_panel.cpp
-                                  ${WAYPOINT_GROUP_PANEL_MOC_FILES}
-                                  ${WAYPOINT_GROUP_PANEL_UIS_H})
+#Headers are needed by AUTOMOC, otherwise we get linking errors
+ add_library(waypoint_group_panel src/waypoint_group_panel.cpp include/pal_waypoint_rviz_plugins/waypoint_group_panel.h)
 
-# add_dependencies(pal_waypoint_rviz_plugins_node pal_waypoint_rviz_plugins_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(waypoint_group_panel
 ${QT_LIBRARIES}
 ${catkin_LIBRARIES}
 )
- add_library(add_point_tool         src/add_point_tool.cpp
-                                  ${ADD_POINT_TOOL_MOC_FILES})
 
- add_library(add_zone_tool         src/add_zone_tool.cpp
-                                  ${ADD_ZONE_TOOL_MOC_FILES})
+#Headers are needed by AUTOMOC, otherwise we get linking errors
+add_library(add_point_tool src/add_point_tool.cpp
+                            include/pal_waypoint_rviz_plugins/add_point_tool.h)
+
+add_library(add_zone_tool  src/add_zone_tool.cpp
+                            include/pal_waypoint_rviz_plugins/add_zone_tool.h)
 
 # add_dependencies(pal_waypoint_rviz_plugins_node pal_waypoint_rviz_plugins_generate_messages_cpp)
 
@@ -87,7 +92,7 @@ target_link_libraries(add_point_tool
   ${QT_LIBRARIES}
 )
 target_link_libraries(add_zone_tool
-    add_point_tool 
+    add_point_tool
 )
 #############
 ## Install ##
@@ -139,7 +144,7 @@ install(FILES plugin_description.xml
 
 if(CATKIN_ENABLE_TESTING)
     #This is not a unit test, just an executable to visualize the rviz panel
-    add_executable(waypoint_group_panel_test test/waypoint_group_panel_test.cpp)
+    add_executable(waypoint_group_panel_test test/waypoint_group_panel_test.cpp test/qros_spinner.cpp)
     target_link_libraries(waypoint_group_panel_test waypoint_group_panel)
 endif(CATKIN_ENABLE_TESTING)
 ## Add gtest based cpp test target and link libraries

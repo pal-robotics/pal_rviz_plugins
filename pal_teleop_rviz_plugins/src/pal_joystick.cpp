@@ -52,7 +52,11 @@ void PalJoystick::mouseMoveEvent(QMouseEvent *ev)
 {
     //Mouse position can be out of the bounds of the widget, in this case we enforce it to be within the bounds
 
-    updateJoystick(ev->posF());
+    #if QT_VERSION >= 0x050000
+      updateJoystick(ev->localPos());
+     #else
+      updateJoystick(ev->posF());
+    #endif
 
 }
 

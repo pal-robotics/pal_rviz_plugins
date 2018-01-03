@@ -93,37 +93,47 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(include
-                  ${CMAKE_CURRENT_BINARY_DIR} # Auto generated qt headers go here
+    ${CMAKE_CURRENT_BINARY_DIR} # Auto generated qt headers go here
                   ${catkin_INCLUDE_DIRS}
 )
 
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-include(${QT_USE_FILE})
-
+file(GLOB QT_RESOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} resources/*.qrc)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+if(rviz_QT_VERSION VERSION_LESS "5")
+    message(STATUS "Using Qt4 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+    find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+    QT4_ADD_RESOURCES(QT_RESOURCES_CPP ${QT_RESOURCES})
+    include(${QT_USE_FILE})
+else()
+    message(STATUS "Using Qt5 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+    find_package(Qt5 ${rviz_QT_VERSION} EXACT REQUIRED Core Widgets)
+    ## make target_link_libraries(${QT_LIBRARIES}) pull in all required dependencies
+    QT5_ADD_RESOURCES(QT_RESOURCES_CPP ${QT_RESOURCES})
+    set(QT_LIBRARIES Qt5::Widgets)
+endif()
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
 
-file(GLOB QT_RESOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} resources/*.qrc)
-QT4_WRAP_CPP(PAL_TELEOP_PANEL_MOC_FILES include/pal_teleop_rviz_plugins/pal_teleop_panel.h)
-QT4_WRAP_CPP(PAL_JOYSTICK_PANEL_MOC_FILES include/pal_teleop_rviz_plugins/pal_joystick.h)
-QT4_ADD_RESOURCES(QT_RESOURCES_CPP ${QT_RESOURCES})
-QT4_WRAP_UI(PAL_TELEOP_PANEL_UIS_H src/pal_teleop_panel.ui)
+
 
 add_library(pal_joystick src/pal_joystick.cpp
-                                ${PAL_JOYSTICK_PANEL_MOC_FILES}
-                                ${QT_RESOURCES_CPP})
+                         include/pal_teleop_rviz_plugins/pal_joystick.h
+                         ${QT_RESOURCES_CPP})
 
 ## Declare a cpp library
 add_library(pal_teleop_panel src/pal_teleop_panel.cpp
-                                  ${PAL_TELEOP_PANEL_MOC_FILES}
-                                  ${PAL_TELEOP_PANEL_UIS_H}
+                             include/pal_teleop_rviz_plugins/pal_teleop_panel.h
                                   ${QT_RESOURCES_CPP})
 
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(pal_teleop_rviz_plugins_node pal_teleop_rviz_plugins_generate_messages_cpp)
+
+target_link_libraries(pal_joystick
+  ${QT_LIBRARIES})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(pal_teleop_panel

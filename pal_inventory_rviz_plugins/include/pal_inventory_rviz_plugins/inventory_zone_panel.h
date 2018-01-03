@@ -5,8 +5,8 @@
  *      Author:  victor
  */
 
-#ifndef WAYPOINT_GROUP_PANEL_H
-#define WAYPOINT_GROUP_PANEL_H
+#ifndef INVENTORY_GROUP_PANEL_H
+#define INVENTORY_GROUP_PANEL_H
 
 #ifndef Q_MOC_RUN
 # include <ros/ros.h>
@@ -67,4 +67,4 @@ private:
 
 } // pal
 
-#endif // WAYPOINT_GROUP_PANEL_H
+#endif // INVENTORY_GROUP_PANEL_H

@@ -8,7 +8,9 @@
 #ifndef MAP_MANAGEMENT_WIDGET_H
 #define MAP_MANAGEMENT_WIDGET_H
 
+#ifndef Q_MOC_RUN  // See: https://bugreports.qt-project.org/browse/QTBUG-22829
 #include <ros/ros.h>
+#endif
 #include <qwidget.h>
 #include <pal_navigation_msgs/NavigationStatus.h>
 namespace pal

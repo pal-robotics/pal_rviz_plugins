@@ -37,14 +37,27 @@ find_package(catkin REQUIRED COMPONENTS
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+## This setting causes Qt's "MOC" generation to happen automatically.
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+if(rviz_QT_VERSION VERSION_LESS "5")
+    message(STATUS "Using Qt4 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+    find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+    include(${QT_USE_FILE})
+    #Required for catkin_package
+    set(QT_INCLUDE_DIRS ${QT_INCLUDE_DIR}
+                        ${QT_QTCORE_INCLUDE_DIR}
+                        ${QT_QTGUI_INCLUDE_DIR})
+else()
+    message(STATUS "Using Qt5 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+    find_package(Qt5 ${rviz_QT_VERSION} EXACT REQUIRED Core Widgets)
+    ## make target_link_libraries(${QT_LIBRARIES}) pull in all required dependencies
+    set(QT_LIBRARIES Qt5::Widgets)
+    #Required for catkin_package
+    set(QT_INCLUDE_DIRS ${Qt5Core_INCLUDE_DIRS}
+                        ${Qt5Widgets_INCLUDE_DIRS})
+endif()
 
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-include(${QT_USE_FILE})
-
-#Required for catkin_package
-set(QT_INCLUDE_DIRS ${QT_INCLUDE_DIR}
-                    ${QT_QTCORE_INCLUDE_DIR}
-                    ${QT_QTGUI_INCLUDE_DIR})
 
 catkin_package(
  LIBRARIES map_management_widget 
@@ -76,18 +89,14 @@ set(NAVIGATION_WIDGETS
     map_management_widget
     navigation_utils_panel
     dock_undock)
+
 foreach(widget ${NAVIGATION_WIDGETS})
-    QT4_WRAP_CPP(${widget}_MOC_FILES include/${PROJECT_NAME}/${widget}.h)
-    QT4_WRAP_UI(${widget}_UIS_H src/${widget}.ui)
-    add_library(${widget} src/${widget}.cpp ${${widget}_MOC_FILES} ${${widget}_UIS_H})
+    add_library(${widget} src/${widget}.cpp include/${PROJECT_NAME}/${widget}.h)
     target_link_libraries(${widget}  ${catkin_LIBRARIES} ${QT_LIBRARIES})
 endforeach()
 
-QT4_WRAP_CPP(MAP_MANAGEMENT_PANEL_MOC_FILES src/map_management_panel.h)
-
-
 add_library(map_management_panel src/map_management_panel.cpp
-                                  ${MAP_MANAGEMENT_PANEL_MOC_FILES})
+                                 src/map_management_panel.h)
 
 target_link_libraries(map_management_panel
   map_management_widget

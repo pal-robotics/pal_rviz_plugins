@@ -12,9 +12,12 @@
 #define NAVIGATION_UTILS_PANEL_H
 
 #include <QWidget>
+
+#ifndef Q_MOC_RUN  // See: https://bugreports.qt-project.org/browse/QTBUG-22829
 #include <rviz/panel.h>
 #include <pal_composite_navigation_msgs/GoToFloorPOIAction.h>
 #include <actionlib/client/simple_action_client.h>
+#endif
 namespace Ui {
 class NavigationUtilsPanel;
 }
