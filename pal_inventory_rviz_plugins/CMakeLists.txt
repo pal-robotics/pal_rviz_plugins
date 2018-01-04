@@ -43,55 +43,57 @@ catkin_package(
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include
-                  ${CMAKE_CURRENT_BINARY_DIR} # Auto generated qt headers go here
-                  ${catkin_INCLUDE_DIRS}
-)
+include_directories(include)
+include_directories(SYSTEM ${CMAKE_CURRENT_BINARY_DIR} # Auto generated qt headers go here
+                           ${catkin_INCLUDE_DIRS})
 
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-include(${QT_USE_FILE})
+## This setting causes Qt's "MOC" generation to happen automatically.
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+if(rviz_QT_VERSION VERSION_LESS "5")
+    message(STATUS "Using Qt4 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+    find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+    include(${QT_USE_FILE})
+else()
+    message(STATUS "Using Qt5 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+    find_package(Qt5 ${rviz_QT_VERSION} EXACT REQUIRED Core Widgets)
+    ## make target_link_libraries(${QT_LIBRARIES}) pull in all required dependencies
+    set(QT_LIBRARIES Qt5::Widgets)
+endif()
 
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
 add_definitions(-DQT_NO_KEYWORDS)
-QT4_WRAP_CPP(INVENTORY_CONFIGURATION_WIDGET_MOC_FILES include/pal_inventory_rviz_plugins/inventory_configuration_widget.h)
-QT4_WRAP_UI(INVENTORY_CONFIGURATION_WIDGET_UIS_H src/inventory_configuration_widget.ui)
-
-QT4_WRAP_CPP(INVENTORY_MANAGEMENT_PANEL_MOC_FILES src/inventory_management_panel.h)
-
-
-
-QT4_WRAP_CPP(INVENTORY_ZONE_PANEL_MOC_FILES include/pal_inventory_rviz_plugins/inventory_zone_panel.h)
-QT4_WRAP_UI(INVENTORY_ZONE_PANEL_UIS_H src/inventory_zone_panel.ui)
-
-
-
 
 ## Declare a cpp library
+#Headers are needed by AUTOMOC, otherwise we get linking errors
  add_library(inventory_configuration_widget src/inventory_configuration_widget.cpp
-                                  ${INVENTORY_CONFIGURATION_WIDGET_MOC_FILES}
-                                  ${INVENTORY_CONFIGURATION_WIDGET_UIS_H})
-
- add_library(inventory_management_panel src/inventory_management_panel.cpp
-                                  ${INVENTORY_MANAGEMENT_PANEL_MOC_FILES})
-
- add_library(inventory_zone_panel src/inventory_zone_panel.cpp
-                                  ${INVENTORY_ZONE_PANEL_MOC_FILES}
-                                  ${INVENTORY_ZONE_PANEL_UIS_H})
-
-# add_dependencies(pal_inventory_rviz_plugins_node pal_inventory_rviz_plugins_generate_messages_cpp)
+                                            include/pal_inventory_rviz_plugins/inventory_configuration_widget.h)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(inventory_configuration_widget
-  ${catkin_LIBRARIES}
   ${QT_LIBRARIES}
+  ${catkin_LIBRARIES}
 )
 
+
+add_library(inventory_management_panel src/inventory_management_panel.cpp
+                                        src/inventory_management_panel.h)
+
+ add_library(inventory_zone_panel src/inventory_zone_panel.cpp
+                                  include/pal_inventory_rviz_plugins/inventory_zone_panel.h)
+
+# add_dependencies(pal_inventory_rviz_plugins_node pal_inventory_rviz_plugins_generate_messages_cpp)
+
+
+
 target_link_libraries(inventory_management_panel
+  ${QT_LIBRARIES}
   inventory_configuration_widget
 )
 
 target_link_libraries(inventory_zone_panel
+  ${QT_LIBRARIES}
   ${catkin_LIBRARIES}
 )
 
