@@ -6,10 +6,12 @@
  */
 
 #include <pal_navigation_rviz_plugins/map_configuration_widget.h>
+#include <pal_navigation_msgs/Acknowledgment.h>
 #include "ui_map_configuration_widget.h"
 #include <qmessagebox.h>
 #include <qinputdialog.h>
 #include <qfiledialog.h>
+#include <std_srvs/Empty.h>
 #include <ros/ros.h>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
@@ -62,7 +64,8 @@ std::string exec_remote_cmd(const std::string &cmd)
     return exec(cmd);
   else
   {
-    std::string remote_cmd = "ssh pal@" + host + " " + cmd;
+    //std::string remote_cmd = "ssh pal@" + host + " " + cmd;
+    std::string remote_cmd = "sshpass -p pal ssh -o \"StrictHostKeyChecking no\" pal@" + host + " " + cmd;
     return exec(remote_cmd);
   }
 }
@@ -140,13 +143,37 @@ void map_configuration_widget::refreshMaps()
 
 void map_configuration_widget::setActive()
 {
-  std::string cmd =
-      "ln -sfT " + getMapDir() + "configurations/" + getSelectedMap() +
-      " " + getMapDir() + "/config";
-  exec_remote_cmd(cmd);
-  refreshMaps();
-  QMessageBox::warning(this, "Reboot needed",
-                       "Robot reboot is needed before new map is used");
+    ros::NodeHandle nh;
+    ros::ServiceClient clientChangeMap =
+            nh.serviceClient<pal_navigation_msgs::Acknowledgment>("/pal_map_manager/change_map");
+    pal_navigation_msgs::Acknowledgment srvChangeMap;
+    srvChangeMap.request.input = getSelectedMap();
+    if ( !clientChangeMap.call(srvChangeMap) )
+        QMessageBox::warning(this, "Unable to change active map",
+                             srvChangeMap.response.error.c_str());
+    else
+    {
+        ros::ServiceClient clientClearCostmaps =
+                nh.serviceClient<std_srvs::Empty>("/move_base/clear_costmaps");
+        std_srvs::Empty srvClearCostmaps;
+        clientClearCostmaps.call(srvClearCostmaps);
+        refreshMaps();
+    }
+
+//    std::string cmd = "source ~/.bashrc; rosservice call /pal_map_manager/change_map \"input: '" +
+//                      getSelectedMap() + "'\"";
+
+//    ROS_INFO_STREAM("Running remote cmd: " << cmd);
+////  std::string cmd =
+////      "ln -sfT " + getMapDir() + "configurations/" + getSelectedMap() +
+////      " " + getMapDir() + "/config";
+//    exec_remote_cmd(cmd);
+//    cmd = "rosservice call /move_base/clear_costmaps \"{}\"";
+//    exec_remote_cmd(cmd);
+//    refreshMaps();
+////  QMessageBox::warning(this, "Reboot needed",
+////                       "Robot reboot is needed before new map is used");
+
 }
 
 void map_configuration_widget::downloadMap()
@@ -165,7 +192,7 @@ void map_configuration_widget::downloadMap()
     cmd = "cp -r " + getMapDir() + "configurations/" + map + " " +
           target_dir.toStdString();
   else
-    cmd = "scp -r pal@" + host + ":" + getMapDir() + "configurations/" + map + " " +
+    cmd = "sshpass -p pal scp -o StrictHostKeyChecking=no -r pal@" + host + ":" + getMapDir() + "configurations/" + map + " " +
           target_dir.toStdString();
   exec(cmd);
 }
@@ -193,7 +220,7 @@ void map_configuration_widget::uploadMap()
     cmd = "cp -r " + source_dir.toStdString() + " " +
           getMapDir() + "configurations/";
   else
-    cmd = "scp -r " + source_dir.toStdString() +
+    cmd = "sshpass -p pal scp -o StrictHostKeyChecking=no -r " + source_dir.toStdString() +
           " pal@" + host + ":" + getMapDir() + "configurations/";
   exec(cmd);
   refreshMaps();
