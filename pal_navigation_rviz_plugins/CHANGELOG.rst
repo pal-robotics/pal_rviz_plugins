@@ -2,8 +2,8 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.9 (2018-01-12)
+------------------
 * prevent console input requests
   Use sshpass with inline password
 * Fix build errors and compatibility to Qt5 and Qt4
