@@ -2,6 +2,11 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix build errors and compatibility to Qt5 and Qt4
+* Contributors: Hilario Tome
+
 1.0.8 (2017-04-21)
 ------------------
 
