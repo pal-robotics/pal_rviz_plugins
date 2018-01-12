@@ -42,6 +42,7 @@
   <depend>tf</depend>
   <depend>laser_servoing_msgs</depend>
   <depend>dock_charge_sm_msgs</depend>
+  <depend>sshpass</depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
