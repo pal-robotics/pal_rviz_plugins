@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
   laser_pattern_detector_msgs
   pal_composite_navigation_msgs
   dock_charge_sm_msgs
+  dock_charge_sm_node
   laser_servoing_msgs
   pluginlib
   roscpp
@@ -61,7 +62,7 @@ endif()
 
 catkin_package(
  LIBRARIES map_management_widget 
- CATKIN_DEPENDS roscpp
+ CATKIN_DEPENDS roscpp dock_charge_sm_node
  DEPENDS QT
 )
 

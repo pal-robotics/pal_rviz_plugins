@@ -13,6 +13,8 @@
 #include <QInputDialog>
 #include <pal_navigation_rviz_plugins/dock_undock.h>
 #include <ros/ros.h>
+#include <dock_charge_sm_node/AutoMarkDock.h>
+#include <dock_charge_sm_node/AutoMarkDockResponse.h>
 
 namespace pal
 {
@@ -25,6 +27,7 @@ DockUndockPanel::DockUndockPanel(QWidget *parent) :
   ui->setupUi(this);
   connect(ui->dock, SIGNAL(clicked()), this, SLOT(Dock()));
   connect(ui->undock, SIGNAL(clicked()), this, SLOT(Undock()));
+  connect(ui->autodock, SIGNAL(clicked()), this, SLOT(AutoDock()));
   connect(ui->cancelDockUndock, SIGNAL(clicked()),
           this, SLOT(cancelDockUndock()));
 }
@@ -32,6 +35,30 @@ DockUndockPanel::DockUndockPanel(QWidget *parent) :
 DockUndockPanel::~DockUndockPanel()
 {
   delete ui;
+}
+
+
+void DockUndockPanel::AutoDock()
+{
+  ui->feedbackText->setText(QString::fromStdString("Call sent"));
+  ui->cancelDockUndock->setEnabled(true);
+  ROS_INFO("autodock_client:");
+
+  ros::NodeHandle nh;
+  ros::ServiceClient client = nh.serviceClient<dock_charge_sm_node::AutoMarkDock>("auto_mark_dock");
+
+  dock_charge_sm_node::AutoMarkDock srv;
+
+
+  if(client.call(srv)) {
+    ROS_INFO("OK, sent. Here is the answer:");
+    ROS_INFO(" - Response string: '%s'", srv.response.result.c_str());
+    ui->feedbackText->setText(QString::fromStdString(srv.response.result.c_str()));
+  } else {
+    ROS_INFO("Unable to call.");
+    ui->feedbackText->setText(QString::fromStdString("Unable to call."));
+  }
+  ui->cancelDockUndock->setEnabled(false);
 }
 
 void DockUndockPanel::Undock()

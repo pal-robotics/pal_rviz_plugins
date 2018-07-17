@@ -17,6 +17,7 @@
 #include <rviz/panel.h>
 #include <laser_servoing_msgs/UndockAction.h>
 #include <dock_charge_sm_msgs/GoAndDockAction.h>
+
 #include <actionlib/client/simple_action_client.h>
 #endif
 
@@ -37,6 +38,7 @@ public:
 private Q_SLOTS:
   void Dock();
   void Undock();
+  void AutoDock();
   void cancelDockUndock();
 private:
   Ui::DockUndockPanel *ui;
@@ -44,12 +46,12 @@ private:
   actionlib::SimpleActionClient<dock_charge_sm_msgs::GoAndDockAction> _dock_ac;
 
   void undockGoalDone(
-          const actionlib::SimpleClientGoalState &state,
-          const laser_servoing_msgs::UndockResultConstPtr &result);
+      const actionlib::SimpleClientGoalState &state,
+      const laser_servoing_msgs::UndockResultConstPtr &result);
   void undockGoalActive();
 
   void dockGoalDone(const actionlib::SimpleClientGoalState &state,
-          const dock_charge_sm_msgs::GoAndDockResultConstPtr &result);
+                    const dock_charge_sm_msgs::GoAndDockResultConstPtr &result);
   void dockGoalActive();
 };
 } //namespace
