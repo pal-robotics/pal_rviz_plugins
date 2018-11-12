@@ -31,9 +31,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="autodock">
+      <widget class="QPushButton" name="createDock">
        <property name="text">
-        <string>AutoGen POIs</string>
+        <string>Create POIs</string>
        </property>
       </widget>
      </item>

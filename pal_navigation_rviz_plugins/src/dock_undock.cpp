@@ -13,8 +13,6 @@
 #include <QInputDialog>
 #include <pal_navigation_rviz_plugins/dock_undock.h>
 #include <ros/ros.h>
-#include <dock_charge_sm_node/AutoMarkDock.h>
-#include <dock_charge_sm_node/AutoMarkDockResponse.h>
 
 namespace pal
 {
@@ -22,12 +20,13 @@ DockUndockPanel::DockUndockPanel(QWidget *parent) :
   rviz::Panel(parent),
   ui(new Ui::DockUndockPanel),
   _undock_ac("/undocker_server", false),
-  _dock_ac("/go_and_dock", false)
+  _dock_ac("/go_and_dock", false),
+  create_dock_ac_("/create_dockstation", false)
 {
   ui->setupUi(this);
   connect(ui->dock, SIGNAL(clicked()), this, SLOT(Dock()));
   connect(ui->undock, SIGNAL(clicked()), this, SLOT(Undock()));
-  connect(ui->autodock, SIGNAL(clicked()), this, SLOT(AutoDock()));
+  connect(ui->createDock, SIGNAL(clicked()), this, SLOT(createDock()));
   connect(ui->cancelDockUndock, SIGNAL(clicked()),
           this, SLOT(cancelDockUndock()));
 }
@@ -37,29 +36,6 @@ DockUndockPanel::~DockUndockPanel()
   delete ui;
 }
 
-
-void DockUndockPanel::AutoDock()
-{
-  ui->feedbackText->setText(QString::fromStdString("Call sent"));
-  ui->cancelDockUndock->setEnabled(true);
-  ROS_INFO("autodock_client:");
-
-  ros::NodeHandle nh;
-  ros::ServiceClient client = nh.serviceClient<dock_charge_sm_node::AutoMarkDock>("auto_mark_dock");
-
-  dock_charge_sm_node::AutoMarkDock srv;
-
-
-  if(client.call(srv)) {
-    ROS_INFO("OK, sent. Here is the answer:");
-    ROS_INFO(" - Response string: '%s'", srv.response.result.c_str());
-    ui->feedbackText->setText(QString::fromStdString(srv.response.result.c_str()));
-  } else {
-    ROS_INFO("Unable to call.");
-    ui->feedbackText->setText(QString::fromStdString("Unable to call."));
-  }
-  ui->cancelDockUndock->setEnabled(false);
-}
 
 void DockUndockPanel::Undock()
 {
@@ -78,25 +54,58 @@ void DockUndockPanel::Dock()
                boost::bind(&DockUndockPanel::dockGoalActive, this));
 }
 
+void DockUndockPanel::createDock()
+{
+  pal_common_msgs::EmptyGoal goal;
+  create_dock_ac_.sendGoal(goal,
+               boost::bind(&DockUndockPanel::createDockGoalDone, this, _1, _2),
+               boost::bind(&DockUndockPanel::createDockGoalActive, this));
+}
+
 void DockUndockPanel::cancelDockUndock()
 {
   _undock_ac.cancelAllGoals();
   _dock_ac.cancelAllGoals();
+  create_dock_ac_.cancelAllGoals();
 }
 
+void DockUndockPanel::setActionButtons(const bool enable)
+{
+  if(enable)
+  {
+    ui->cancelDockUndock->setEnabled(false);
+    ui->dock->setEnabled(true);
+    ui->undock->setEnabled(true);
+    ui->createDock->setEnabled(true);
+  }
+  else
+  {
+    ui->cancelDockUndock->setEnabled(true);
+    ui->dock->setEnabled(false);
+    ui->undock->setEnabled(false);
+    ui->createDock->setEnabled(false);
+  }
+}
 
 void DockUndockPanel::undockGoalActive()
 {
   ui->feedbackText->setText(QString::fromStdString(
                               _undock_ac.getState().toString()));
-  ui->cancelDockUndock->setEnabled(true);
+  setActionButtons(false);
 }
 
 void DockUndockPanel::dockGoalActive()
 {
   ui->feedbackText->setText(QString::fromStdString(
                               _dock_ac.getState().toString()));
-  ui->cancelDockUndock->setEnabled(true);
+  setActionButtons(false);
+}
+
+void DockUndockPanel::createDockGoalActive()
+{
+  ui->feedbackText->setText(QString::fromStdString(
+                              create_dock_ac_.getState().toString()));
+  setActionButtons(false);
 }
 
 void DockUndockPanel::undockGoalDone(
@@ -104,7 +113,7 @@ void DockUndockPanel::undockGoalDone(
     const laser_servoing_msgs::UndockResultConstPtr &result)
 {
   ui->feedbackText->setText(QString::fromStdString(state.toString()));
-  ui->cancelDockUndock->setEnabled(false);
+  setActionButtons(true);
 }
 
 void DockUndockPanel::dockGoalDone(
@@ -112,7 +121,15 @@ void DockUndockPanel::dockGoalDone(
     const dock_charge_sm_msgs::GoAndDockResultConstPtr &result)
 {
   ui->feedbackText->setText(QString::fromStdString(state.toString()));
-  ui->cancelDockUndock->setEnabled(false);
+  setActionButtons(true);
+}
+
+void DockUndockPanel::createDockGoalDone(
+    const actionlib::SimpleClientGoalState &state,
+    const pal_common_msgs::EmptyResultConstPtr &result)
+{
+  ui->feedbackText->setText(QString::fromStdString(state.toString()));
+  setActionButtons(true);
 }
 
 }
