@@ -33,7 +33,7 @@
      <item>
       <widget class="QPushButton" name="createDock">
        <property name="text">
-        <string>Create POIs</string>
+        <string>Learn Dock</string>
        </property>
       </widget>
      </item>
