@@ -2,6 +2,17 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'add-create-dock' into 'dubnium-devel'
+  Add create dock
+  See merge request app-tools/pal_rviz_plugins!7
+* changed buttom text
+* cosmetic
+* created "create POIs" button for learning dock config
+* AutoGen POIs button
+* Contributors: Andrei Pasnicenco, Procópio Stein, Victor Lopez
+
 1.0.9 (2018-01-12)
 ------------------
 * prevent console input requests
