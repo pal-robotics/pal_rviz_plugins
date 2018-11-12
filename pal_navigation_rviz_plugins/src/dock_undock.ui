@@ -30,6 +30,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="createDock">
+       <property name="text">
+        <string>Learn Dock</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="1" column="0">
