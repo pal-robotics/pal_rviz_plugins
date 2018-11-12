@@ -2,8 +2,8 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.10 (2018-11-12)
+-------------------
 * Merge branch 'add-create-dock' into 'dubnium-devel'
   Add create dock
   See merge request app-tools/pal_rviz_plugins!7
