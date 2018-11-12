@@ -22,7 +22,8 @@
 #include <actionlib/client/simple_action_client.h>
 #endif
 
-namespace Ui {
+namespace Ui
+{
 class DockUndockPanel;
 }
 
@@ -41,26 +42,29 @@ private Q_SLOTS:
   void Undock();
   void createDock();
   void cancelDockUndock();
+
 private:
   Ui::DockUndockPanel *ui;
-  actionlib::SimpleActionClient<laser_servoing_msgs::UndockAction> _undock_ac;
-  actionlib::SimpleActionClient<dock_charge_sm_msgs::GoAndDockAction> _dock_ac;
+  actionlib::SimpleActionClient<laser_servoing_msgs::UndockAction> undock_ac_;
+  actionlib::SimpleActionClient<dock_charge_sm_msgs::GoAndDockAction> dock_ac_;
   actionlib::SimpleActionClient<pal_common_msgs::EmptyAction> create_dock_ac_;
 
-  void undockGoalDone(
-      const actionlib::SimpleClientGoalState &state,
-      const laser_servoing_msgs::UndockResultConstPtr &result);
+  void setActionButtons(const bool enable);
+
   void undockGoalActive();
+
+  void dockGoalActive();
+
+  void createDockGoalActive();
+
+  void undockGoalDone(const actionlib::SimpleClientGoalState &state,
+                      const laser_servoing_msgs::UndockResultConstPtr &result);
 
   void dockGoalDone(const actionlib::SimpleClientGoalState &state,
                     const dock_charge_sm_msgs::GoAndDockResultConstPtr &result);
-  void dockGoalActive();
 
   void createDockGoalDone(const actionlib::SimpleClientGoalState &state,
-                    const pal_common_msgs::EmptyResultConstPtr &result);
-  void createDockGoalActive();
-
-  void setActionButtons(const bool enable);
+                          const pal_common_msgs::EmptyResultConstPtr &result);
 };
-} //namespace
-#endif // DOCK_UNDOCK_PANEL_H_PANEL_H
+}  // namespace
+#endif  // DOCK_UNDOCK_PANEL_H_PANEL_H
