@@ -60,7 +60,14 @@ void NavigationUtilsPanel::imgFromScan()
 void NavigationUtilsPanel::savePosePOI()
 {
 
-  auto pose = ros::topic::waitForMessage<geometry_msgs::PoseWithCovarianceStamped>("/amcl_pose");
+  auto pose = ros::topic::waitForMessage<geometry_msgs::PoseWithCovarianceStamped>(
+                "/robot_pose", ros::Duration(2.0));
+
+  if(pose == NULL){
+    ROS_ERROR_STREAM("No robot pose received.");
+    return;
+  }
+
   QString nameRegex = QString("([a-z]|[A-Z]|[0-9]|_)+");
   QString name;
   while (true)
