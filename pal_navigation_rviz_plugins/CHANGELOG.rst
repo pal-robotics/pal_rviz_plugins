@@ -2,6 +2,14 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'use-robot-pose' into 'dubnium-devel'
+  use robot_pose intead of amcl_pose, added timeout
+  See merge request app-tools/pal_rviz_plugins!8
+* use robot_pose intead of amcl_pose, added timeout
+* Contributors: Procópio Stein, Victor Lopez
+
 1.0.10 (2018-11-12)
 -------------------
 * Merge branch 'add-create-dock' into 'dubnium-devel'
