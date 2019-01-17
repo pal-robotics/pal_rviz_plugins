@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   pal_composite_navigation_msgs
   dock_charge_sm_msgs
   laser_servoing_msgs
+  pal_common_msgs
   pluginlib
   roscpp
   roslib
