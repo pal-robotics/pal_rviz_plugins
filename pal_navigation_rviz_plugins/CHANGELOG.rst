@@ -2,6 +2,11 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Clang fixes
+* Contributors: Victor Lopez
+
 1.0.11 (2018-12-05)
 -------------------
 * Merge branch 'use-robot-pose' into 'dubnium-devel'
