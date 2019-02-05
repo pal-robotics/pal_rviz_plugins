@@ -78,11 +78,8 @@ std::string exec_remote_cmd(const std::string &cmd)
  */
 std::string getActiveMap()
 {
-  ros::NodeHandle nh;
-  ros::ServiceClient client_get_active =
-      nh.serviceClient<pal_navigation_msgs::ListMaps>("/pal_map_manager/current_map");
   pal_navigation_msgs::ListMaps lm;
-  if (client_get_active.call(lm))
+  if (ros::service::call("/pal_map_manager/current_map", lm))
   {
     if (lm.response.success && lm.response.maps.size() == 1)
     {
@@ -116,13 +113,9 @@ map_configuration_widget::~map_configuration_widget()
 void map_configuration_widget::refreshMaps()
 {
   std::string active_map = getActiveMap();
-
-  ros::NodeHandle nh;
-  ros::ServiceClient clientListMaps =
-      nh.serviceClient<pal_navigation_msgs::ListMaps>("/pal_map_manager/list_maps");
   pal_navigation_msgs::ListMaps lm;
 
-  if (clientListMaps.call(lm) && lm.response.success)
+  if (ros::service::call("/pal_map_manager/list_maps", lm) && lm.response.success)
   {
     ui->listWidget->clear();
     for(auto s : lm.response.maps)
