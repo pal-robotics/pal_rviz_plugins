@@ -2,8 +2,8 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.13 (2019-02-05)
+-------------------
 * Merge branch 'rename_map_service' into 'dubnium-devel'
   Use map-related services
   See merge request app-tools/pal_rviz_plugins!10
