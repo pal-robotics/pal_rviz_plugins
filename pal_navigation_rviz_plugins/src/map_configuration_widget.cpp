@@ -7,6 +7,8 @@
 
 #include <pal_navigation_rviz_plugins/map_configuration_widget.h>
 #include <pal_navigation_msgs/Acknowledgment.h>
+#include <pal_navigation_msgs/RenameMap.h>
+#include <pal_navigation_msgs/ListMaps.h>
 #include "ui_map_configuration_widget.h"
 #include <qmessagebox.h>
 #include <qinputdialog.h>
@@ -76,10 +78,15 @@ std::string exec_remote_cmd(const std::string &cmd)
  */
 std::string getActiveMap()
 {
-  std::string get_active_map_cmd = "readlink " + getMapDir() + "config | xargs basename";
-  std::string active_map = exec_remote_cmd(get_active_map_cmd);
-  boost::replace_all(active_map, "\n", "");
-  return active_map;
+  pal_navigation_msgs::ListMaps lm;
+  if (ros::service::call("/pal_map_manager/current_map", lm))
+  {
+    if (lm.response.success && lm.response.maps.size() == 1)
+    {
+      return lm.response.maps[0];
+    }
+  }
+  return "";
 }
 
 map_configuration_widget::map_configuration_widget(QWidget *parent) :
@@ -105,40 +112,41 @@ map_configuration_widget::~map_configuration_widget()
 
 void map_configuration_widget::refreshMaps()
 {
-  ui->listWidget->clear();
-  std::string cmd =
-      "ls " + getMapDir() + "configurations/*/map.yaml | xargs -l1 dirname | xargs -l1 basename";
-
-  std::string output = exec_remote_cmd(cmd);
-
   std::string active_map = getActiveMap();
-  std::vector<std::string> maps;
-  boost::split(maps, output, boost::is_any_of("\n"));
+  pal_navigation_msgs::ListMaps lm;
 
-  for(auto s : maps)
+  if (ros::service::call("/pal_map_manager/list_maps", lm) && lm.response.success)
   {
-    if (s == "")
-      continue;
-    QString map = QString::fromStdString(s);
-    QListWidgetItem *item = new QListWidgetItem(map, ui->listWidget);
-    ui->listWidget->addItem(item);
-    if (s == active_map)
+    ui->listWidget->clear();
+    for(auto s : lm.response.maps)
     {
-      QFont f = item->font();
-      f.setBold(true);
-      item->setFont(f);
-      ui->listWidget->setCurrentItem(item);
+      if (s == "")
+        continue;
+      QString map = QString::fromStdString(s);
+      QListWidgetItem *item = new QListWidgetItem(map, ui->listWidget);
+      ui->listWidget->addItem(item);
+      if (s == active_map)
+      {
+        QFont f = item->font();
+        f.setBold(true);
+        item->setFont(f);
+        ui->listWidget->setCurrentItem(item);
+      }
     }
+
+    if (!ui->listWidget->currentItem())
+      ui->listWidget->setCurrentRow(0);
+
+    bool enable = !lm.response.maps.empty();
+    ui->set_active->setEnabled(enable);
+    ui->download_map->setEnabled(enable);
+    ui->delete_map->setEnabled(enable);
+    ui->rename_map->setEnabled(enable);
   }
-
-  if (!ui->listWidget->currentItem())
-    ui->listWidget->setCurrentRow(0);
-
-  bool enable = !maps.empty();
-  ui->set_active->setEnabled(enable);
-  ui->download_map->setEnabled(enable);
-  ui->delete_map->setEnabled(enable);
-  ui->rename_map->setEnabled(enable);
+  else
+  {
+    QMessageBox::warning(this, "Error Listing Maps", "Unknown error when trying to list maps.");
+  }
 }
 
 void map_configuration_widget::setActive()
@@ -255,15 +263,6 @@ void map_configuration_widget::renameMap()
 {
   std::string map = getSelectedMap();
 
-
-  if (map == getActiveMap())
-  {
-    QMessageBox::warning(this, "Can't rename active map",
-                         "Cannot rename active map, change active map before attempting to rename "
-                         + QString::fromStdString(map));
-    return;
-  }
-
   QRegExp regexp("[A-Z0-9_]+",Qt::CaseInsensitive);
   QString name = QString::fromStdString(map);
   bool ok = false;
@@ -276,11 +275,31 @@ void map_configuration_widget::renameMap()
   }
   while (ok && !regexp.exactMatch(name));
 
-  std::string cmd = "mv " + getMapDir() + "configurations/" + map + " " +
-                    getMapDir() + "configurations/" + name.toStdString();
+  if (ok && name != "")
+  {
+    ros::NodeHandle nh;
+    ros::ServiceClient clientRenameMap =
+            nh.serviceClient<pal_navigation_msgs::RenameMap>("/pal_map_manager/rename_map");
+    pal_navigation_msgs::RenameMap rename_map_srv;
+    rename_map_srv.request.current_map_name = map;
+    rename_map_srv.request.new_map_name = name.toStdString();
 
-  exec_remote_cmd(cmd);
-  refreshMaps();
+    if (clientRenameMap.call(rename_map_srv))
+    {
+      if (rename_map_srv.response.success)
+      {
+        refreshMaps();
+      }
+      else
+      {
+        QMessageBox::warning(this, "Renaming Error", rename_map_srv.response.message.c_str());
+      }
+    }
+    else
+    {
+      QMessageBox::warning(this, "Connection Error", "Couldn't contact Rename Map Service");
+    }
+  }
 }
 
 std::string map_configuration_widget::getSelectedMap() const

@@ -24,6 +24,14 @@ MapManagementPanel::~MapManagementPanel()
 {
 }
 
+void MapManagementPanel::onInitialize()
+{
+    map_configuration_widget* mcw =
+        dynamic_cast<map_configuration_widget*>(layout()->itemAt(0)->widget());
+    if (mcw)
+      mcw->refreshMaps();
+}
+
 } // end namespace pal
 
 #include <pluginlib/class_list_macros.h>

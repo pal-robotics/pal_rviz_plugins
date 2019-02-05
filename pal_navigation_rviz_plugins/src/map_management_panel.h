@@ -21,6 +21,8 @@ public:
   MapManagementPanel( QWidget* parent = 0 );
 
   ~MapManagementPanel();
+
+  virtual void onInitialize() override;
 };
 }
 
