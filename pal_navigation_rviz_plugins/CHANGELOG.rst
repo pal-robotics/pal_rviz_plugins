@@ -2,6 +2,14 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'license-refactor' into 'dubnium-devel'
+  Update pal license
+  See merge request app-tools/pal_rviz_plugins!11
+* Update PAL licenses
+* Contributors: Victor Lopez
+
 1.0.13 (2019-02-05)
 -------------------
 * Merge branch 'rename_map_service' into 'dubnium-devel'
