@@ -29,6 +29,7 @@
 
 
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>libqt_dev</build_depend>
   <depend>pluginlib</depend>
   <depend>roscpp</depend>
   <depend>rviz</depend>
