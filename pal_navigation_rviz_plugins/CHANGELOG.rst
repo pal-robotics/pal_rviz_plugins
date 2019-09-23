@@ -2,6 +2,14 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'add-libqt-dev' into 'dubnium-devel'
+  Add libqt_dev dependency for qt4 and qt5 compatiblity
+  See merge request app-tools/pal_rviz_plugins!12
+* Add libqt_dev dependency for qt4 and qt5 compatiblity
+* Contributors: Victor Lopez
+
 1.0.14 (2019-05-21)
 -------------------
 * Merge branch 'license-refactor' into 'dubnium-devel'
