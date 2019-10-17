@@ -1,10 +1,3 @@
-/*
- *  map_configuration_widget.cpp
- *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
- *  Created on: 11/9/2015
- *      Author: victor
- */
-
 #include <pal_navigation_rviz_plugins/map_configuration_widget.h>
 #include <pal_navigation_msgs/Acknowledgment.h>
 #include <pal_navigation_msgs/RenameMap.h>

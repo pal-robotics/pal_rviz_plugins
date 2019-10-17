@@ -1,9 +1,3 @@
-/*
- *
- *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
- *  Created on: 2015
- *      Author: victor
- */
 #include "map_management_panel.h"
 #include <pal_navigation_rviz_plugins/map_management_widget.h>
 #include <pal_navigation_rviz_plugins/map_configuration_widget.h>

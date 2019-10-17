@@ -1,13 +1,3 @@
-/**************************************************************************
-**
-**  File: navigation_utils_panel.cpp
-**
-**  Author: victor
-**  Created on: 30/08/2016
-**
-**  Copyright (c) 2016 PAL Robotics SL. All Rights Reserved
-**************************************************************************/
-
 #include "ui_dock_undock.h"
 #include <QMessageBox>
 #include <QInputDialog>

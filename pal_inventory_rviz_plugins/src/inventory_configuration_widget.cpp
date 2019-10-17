@@ -1,10 +1,3 @@
-/*
- *  inventory_configuration_widget.cpp
- *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
- *  Created on: 11/9/2015
- *      Author: victor
- */
-
 #include <pal_inventory_rviz_plugins/inventory_configuration_widget.h>
 #include "ui_inventory_configuration_widget.h"
 #include <qmessagebox.h>

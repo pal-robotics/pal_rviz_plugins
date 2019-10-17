@@ -1,10 +1,3 @@
-/*
- *  waypoint_group_panel.cpp
- *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
- *  Created on: 2015
- *      Author:  victor
- */
-
 #include <QDropEvent>
 #include <QTimer>
 #include <QMenu>

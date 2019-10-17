@@ -7,7 +7,7 @@
   <maintainer email="victor.lopez@pal-robotics.com">victor</maintainer>
   <maintainer email="procopio.stein@pal-robotics.com">Procopio Stein</maintainer>
 
-  <license>Proprietary</license>
+  <license>LGPL-3.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roscpp</depend>

@@ -1,10 +1,3 @@
-/*
- *  pal_teleop_panel_test.h
- *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
- *  Created on: 2015
- *      Author:  victor
- */
-
 #include <pal_navigation_rviz_plugins/map_configuration_widget.h>
 #include <qapplication.h>
 #include <ros/ros.h>

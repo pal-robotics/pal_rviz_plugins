@@ -1,10 +1,3 @@
-/*
- *  inventory_zone_panel.cpp
- *  Copyright (c) 2015 PAL Robotics sl. All Rights gserved
- *  Created on: 2015
- *      Author:  victor
- */
-
 #include <pal_inventory_rviz_plugins/inventory_zone_panel.h>
 #include "ui_inventory_zone_panel.h"
 #include <std_msgs/String.h>

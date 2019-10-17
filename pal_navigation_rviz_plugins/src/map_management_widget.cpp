@@ -1,10 +1,3 @@
-/*
- *  map_management_widget.cpp
- *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
- *  Created on: 2015
- *      Author:  victor
- */
-
 #include <pal_navigation_rviz_plugins/map_management_widget.h>
 #include "ui_map_management_widget.h"
 #include <std_srvs/Empty.h>

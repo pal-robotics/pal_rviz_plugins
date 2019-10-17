@@ -1,9 +1,3 @@
-/*
- *
- *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
- *  Created on: 2015
- *      Author: victor
- */
 #include "inventory_management_panel.h"
 #include <pal_inventory_rviz_plugins/inventory_configuration_widget.h>
 #include <QHBoxLayout>

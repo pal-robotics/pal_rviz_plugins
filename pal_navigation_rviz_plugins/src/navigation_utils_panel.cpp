@@ -1,13 +1,3 @@
-/**************************************************************************
-**
-**  File: navigation_utils_panel.cpp
-**
-**  Author: victor
-**  Created on: 30/08/2016
-**
-**  Copyright (c) 2016 PAL Robotics SL. All Rights Reserved
-**************************************************************************/
-
 #include <pal_navigation_rviz_plugins/navigation_utils_panel.h>
 #include "ui_navigation_utils_panel.h"
 #include <laser_pattern_detector_msgs/GetLaserImage.h>

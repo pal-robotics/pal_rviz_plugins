@@ -1,10 +1,3 @@
-/*
- *  pal_teleop_panel.cpp
- *  Copyright (c) 2015 PAL Robotics sl. All Rights Reserved
- *  Created on: 2015
- *      Author:  victor
- */
-
 #include <QTimer>
 #include <QHBoxLayout>
 #include <pal_teleop_rviz_plugins/pal_joystick.h>
