@@ -2,6 +2,11 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add SYSTEM to include_directories
+* Contributors: Victor Lopez
+
 1.0.15 (2019-09-23)
 -------------------
 * Merge branch 'add-libqt-dev' into 'dubnium-devel'
