@@ -2,8 +2,8 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.16 (2019-11-06)
+-------------------
 * Add SYSTEM to include_directories
 * Contributors: Victor Lopez
 
