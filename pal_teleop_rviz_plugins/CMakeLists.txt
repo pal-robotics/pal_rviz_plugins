@@ -92,7 +92,8 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include
+include_directories(include)
+include_directories(SYSTEM
     ${CMAKE_CURRENT_BINARY_DIR} # Auto generated qt headers go here
                   ${catkin_INCLUDE_DIRS}
 )
