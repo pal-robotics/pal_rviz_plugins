@@ -2,6 +2,14 @@
 Changelog for package pal_navigation_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge branch 'gallium-fixes' into 'dubnium-devel'
+  Fix dependency
+  See merge request app-tools/pal_rviz_plugins!14
+* Fix libqt_dev dependency for gallium
+* Contributors: Victor Lopez, victor
+
 1.0.16 (2019-11-06)
 -------------------
 
