@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>pal_navigation_rviz_plugins</name>
-  <version>1.0.16</version>
+  <version>1.0.17</version>
   <description>The pal_navigation_rviz_plugins package</description>
 
   <maintainer email="victor.lopez@pal-robotics.com">victor</maintainer>

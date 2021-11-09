@@ -2,8 +2,8 @@
 Changelog for package pal_teleop_rviz_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.17 (2021-11-09)
+-------------------
 * Merge branch 'gallium-fixes' into 'dubnium-devel'
   Fix dependency
   See merge request app-tools/pal_rviz_plugins!14
